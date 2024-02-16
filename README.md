@@ -2,7 +2,7 @@
 
 
 connect your git to this 
-git clone it same way u did for IOT 
+git clone it same way u did for IOT =>press onto code then you will get link 
 write this in terminal once you are connected 
 git config --global user.name Your usergithubname               
 git config --global user.email your.email@example.com
