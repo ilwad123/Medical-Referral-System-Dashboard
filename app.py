@@ -1,13 +1,20 @@
-from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify
+from flask import Flask, render_template, request, session, redirect, url_for,flash,jsonify
 import csv
 import os
-
 
 app = Flask(__name__)
 app.secret_key = 'This is my Secret Key'
 
 @app.route('/')
-def patient():
+def index():
+    return render_template('index.html') 
+
+@app.route('/upload')
+def upload():
+    return render_template('upload.html') 
+  
+@app.route('/viewpatient',method=["POST" , "GET"])
+def viewpatient():
     datarows=[]
     absolute_path = os.path.dirname(os.path.abspath(__file__))
     with open(os.path.join(absolute_path, "Feeding Dashboard data.csv"), 'r') as csv_file:
@@ -17,12 +24,20 @@ def patient():
             data = [item.strip() if item.strip() != "" else "None" for item in line]
             ref=data[17]
             if ref=="0":
-                data[17]="Not referred"
-            else:
-                data[17]="Referred"
+                    data[17]="Not referred"
+            else:  
+                data[17] ="Referred"
             datarows.append(data)
-        
+            
+    if request.method == 'POST':
+        filter_value = request.form['referralFilter']
+        if filter_value == 'referred':
+            datarows = [data for data in datarows if data[17] == 'Referred']
+        elif filter_value=='Not reffered':
+            datarows=[data for data in datarows if data[17] == 'Not reffered']  
+                      
     return render_template('patient.html',datarows=datarows)
+
 
 
 

@@ -12,17 +12,31 @@
             width: 100%;
             border-collapse: collapse;
             table-layout: fixed;
-            }
-    
+        }
+
+        .referred {
+            color: red;  /*make it better in the future*/
+        }
+
     </style>
 
 </head>
-
 <body>
-
+    <a href="{{ url_for('index') }}">Homepage</a>
+    <a href="{{ url_for('viewpatient') }}">View patient data</a>
+    <a href="{{ url_for('upload') }}">Upload patient data</a>
+    
     <h2>Patient list</h2>
-    <button>filter</button>
-    <button>Export</button>
+    <form action="{{ url_for('viewpatient') }}" method="post">
+        <label for="referralFilter">Filter by Referral:</label>
+        <select id="referralFilter" name="referralFilter">
+            <option value="All" selected>All</option>
+            <option value="referred">Referred</option>
+            <option value="Not reffered'">Not Referred</option>
+        </select>
+        <button type="button" >Apply Filter</button>
+    </form>
+    </form>
 
     <table border="1">
         <tr>
@@ -46,7 +60,6 @@
             <th>referral</th>
         </tr>
 
-    
         {% for row in datarows %}
         <tr>
             <td>{{ row[0] }}</td>
@@ -66,8 +79,7 @@
             <td>{{ row[14] }}</td>
             <td>{{ row[15] }}</td>
             <td>{{ row[16] }}</td>
-            <td>{{ row[17] }}</td>
-
+            <td class="{% if row[17] == 'Referred' %}referred{% endif %}">{{ row[17] }}</td>
         </tr>
         {% endfor %}
     </table>
