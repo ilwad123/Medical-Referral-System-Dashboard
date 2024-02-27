@@ -33,9 +33,7 @@ def viewpatient():
             
             datarows.append(data)
     if request.method == 'POST':
-        # Filtering data based on the selected referral_filter
         datarows = [row for row in datarows if referral_filter == 'All' or referral_filter == row[17]]
-        
     return render_template('patient.html', datarows=datarows)
 
 
