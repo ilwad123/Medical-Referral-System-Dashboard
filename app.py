@@ -13,27 +13,34 @@ def index():
 def upload():
     return render_template('upload.html') 
   
-@app.route('/viewpatient')
+
+@app.route('/viewpatient',methods=['GET','POST'])
 def viewpatient():
-    datarows=[]
+    referral_filter = request.form.get('referralFilter')
+    datarows = []
     absolute_path = os.path.dirname(os.path.abspath(__file__))
     with open(os.path.join(absolute_path, "Feeding Dashboard data.csv"), 'r') as csv_file:
         reader = csv.reader(csv_file)
-        reader.__next__()
+        next(reader)  # Skip header
         for line in reader:
             data = [item.strip() if item.strip() != "" else "None" for item in line]
-            ref=data[17]
-            if ref=="0":
-                    data[17]="Not referred"
-            else:  
-                data[17] ="Referred"
-            datarows.append(data)
+            ref = data[17]
             
-    
-                      
-    return render_template('patient.html',datarows=datarows)
+            if ref == "0":
+                data[17] = "Not Referred"
+            else:  
+                data[17] = "Referred"
+            
+            datarows.append(data)
+    if request.method == 'POST':
+        # Filtering data based on the selected referral_filter
+        datarows = [row for row in datarows if referral_filter == 'All' or referral_filter == row[17]]
+        
+    return render_template('patient.html', datarows=datarows)
 
-#heyy
+
+
+
 
 
 if __name__ == '__main__':
