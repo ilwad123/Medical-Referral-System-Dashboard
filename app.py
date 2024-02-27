@@ -13,7 +13,7 @@ def index():
 def upload():
     return render_template('upload.html') 
   
-@app.route('/viewpatient',method=["POST" , "GET"])
+@app.route('/viewpatient')
 def viewpatient():
     datarows=[]
     absolute_path = os.path.dirname(os.path.abspath(__file__))
@@ -29,12 +29,7 @@ def viewpatient():
                 data[17] ="Referred"
             datarows.append(data)
             
-    if request.method == 'POST':
-        filter_value = request.form['referralFilter']
-        if filter_value == 'referred':
-            datarows = [data for data in datarows if data[17] == 'Referred']
-        elif filter_value=='Not reffered':
-            datarows=[data for data in datarows if data[17] == 'Not reffered']  
+    
                       
     return render_template('patient.html',datarows=datarows)
 
