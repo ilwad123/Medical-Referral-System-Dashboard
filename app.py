@@ -33,7 +33,7 @@ def viewpatient():
                       
     return render_template('patient.html',datarows=datarows)
 
-
+#heyy
 
 
 if __name__ == '__main__':
