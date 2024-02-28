@@ -17,6 +17,7 @@ def upload():
 @app.route('/viewpatient',methods=['GET','POST'])
 def viewpatient():
     referral_filter = request.form.get('referralFilter')
+    searchQuery=request.form.get('searchQuery')
     datarows = []
     absolute_path = os.path.dirname(os.path.abspath(__file__))
     with open(os.path.join(absolute_path, "Feeding Dashboard data.csv"), 'r') as csv_file:
@@ -25,6 +26,7 @@ def viewpatient():
         for line in reader:
             data = [item.strip() if item.strip() != "" else "None" for item in line]
             ref = data[17]
+            encounterid=data[0]
             
             if ref == "0":
                 data[17] = "Not Referred"
@@ -33,7 +35,12 @@ def viewpatient():
             
             datarows.append(data)
     if request.method == 'POST':
-        datarows = [row for row in datarows if referral_filter == 'All' or referral_filter == row[17]]
+            datarows = [row for row in datarows if referral_filter == 'All' or referral_filter == row[17]]
+            datarows = [row for row in datarows if searchQuery ==row[0]]
+            
+            print("Search Query:", searchQuery)
+
+   
     return render_template('patient.html', datarows=datarows)
 
 
