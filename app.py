@@ -36,9 +36,8 @@ def viewpatient():
             datarows.append(data)
     if request.method == 'POST':
             datarows = [row for row in datarows if referral_filter == 'All' or referral_filter == row[17]]
-            datarows = [row for row in datarows if searchQuery ==row[0]]
+            # datarows = [row for row in datarows if searchQuery ==row[0]]
             
-            print("Search Query:", searchQuery)
 
    
     return render_template('patient.html', datarows=datarows)
