@@ -58,7 +58,7 @@
         </select>
         <button type="submit">Apply Filter</button>
     </form>
-    <form action="{{ url_for('viewpatient') }}" method="post">
+    <form action="{{ url_for('search') }}" method="post">
         <input type="text" id="searchQuery" name="searchQuery" placeholder="Search...">
         <button type="submit">Search</button>
     </form>
