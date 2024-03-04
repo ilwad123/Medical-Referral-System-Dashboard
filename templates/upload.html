@@ -1,41 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html>   
+<head>   
+    <title>upload the file : GFG</title>   
 
-<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+  * {
+    box-sizing: border-box;
+  }
 
-<title>Upload Template</title>
+  .center {
+    margin: 0 auto;
+    width: 50%; /* Adjust the width as needed */
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Style the header */
-header {
-  background-color: #666;
-  padding: 30px;
-  text-align: center;
-  font-size: 35px;
-  color: white;
-}
-
-/* Create two columns/boxes that floats next to each other */
-nav {
-  float: left;
-  width: 30%;
-  height: 300px; /* only for demonstration, should be removed */
-  background: #ccc;
-  padding: 20px;
-}
-
-/* Style the list inside the menu */
+  }
+  
+  /* Style the header */
+  header {
+    background-color: #666;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    color: white;
+  }
+  
+  /* Create two columns/boxes that floats next to each other */
+  nav {
+    float: left;
+    width: 30%;
+    height: 300px; /* only for demonstration, should be removed */
+    background: #ccc;
+    padding: 20px;
+  }
+  
+  /* Style the list inside the menu */
 nav ul {
   list-style-type: none;
   padding: 0;
@@ -57,10 +62,11 @@ section::after {
 }
 
 .button {
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-align: center;
+    background-color: white; 
+    color: black; 
+    border: 2px solid #C8A2C8;
+    padding: 10px 32px;
+    text-align: ;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
@@ -69,24 +75,22 @@ section::after {
     cursor: pointer;
   }
   
-  .button1 {
-    background-color: white; 
-    color: black; 
-    border: 2px solid #87a69b;
-  }
-  
-  .button1:hover {
-    background-color: #04AA6D;
+  .button:hover {
+    background-color: #C8A2C8;
     color: white;
   }
 
-/* Style the footer */
-footer {
-  background-color: #777;
-  padding: 10px;
-  text-align: center;
-  color: white;
-}
+  .button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #C8A2C8;
+  }
+
+  .button1:hover {
+    background-color: #C8A2C8;
+    color: white;
+  }
+
 
 /* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
 
@@ -97,31 +101,21 @@ footer {
   }
 }
 </style> 
-</head>
-<body>
-
-<h2>Title of the page?</h2>
-<p> We want to be able to add patients details within this page into the system </p>
-
-
-<section> 
-  <nav>
-    <ul>
-        <a href="{{ url_for('index') }}">Homepage</a>
-        <a href="{{ url_for('viewpatient') }}">View patient data</a>
-        <a href="{{ url_for('upload') }}">Upload patient data</a>
-    </ul>
-  </nav>
+</head>   
+<body>   
+  <section>
+    <nav>
+      <ul>
+        <a class = "button" href="{{ url_for('index') }}">Homepage</a>
+        <a class = "button" href="{{ url_for('viewpatient') }}">View patient data</a>
+        <a class = "button" href="{{ url_for('upload') }}">Upload patient data</a>
+      </ul>
+    </nav>
   
-  <article>
-    <h1>Button </h1>
-    <button class="button button1">Green</button>
-  </article>
-</section>
-
-<footer>
-  <p>do we want to add a phrase here</p>
-</footer>
-
-</body>
+    <form action = "/success" method = "post" enctype="multipart/form-data">   
+      <input class= "button1" type="file" name="file" />   
+      <input class="button1" type = "submit" value="Upload">  
+    </form>  
+  </section> 
+</body>   
 </html>
