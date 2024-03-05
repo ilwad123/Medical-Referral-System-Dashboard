@@ -38,7 +38,38 @@
             border-radius:5px;
             border:blue 3px;
         }
+        .form-container {
+          display: flex;
+          justify-content: space-between;
+      }
+  
+        form {
+          margin-right: 3px; 
+      }
+      fieldset{
+        margin: 10px; 
+        padding: 10px; 
+        border: 1px solid #ccc; 
+        border-radius: 5px;
+        width: 80% !important;
+      }
 
+      /* Add this CSS to your stylesheet or within a <style> tag in the HTML document */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .pagination-info,
+        .pagination-links {
+            margin: 20px;
+        }
+        
+        .pagination-links a {
+            margin-right: 20px; /* Adjust margin as needed between page numbers */
+        }
+        
       </style>
       
 </head>
@@ -49,6 +80,8 @@
         <a href="{{ url_for('upload') }}">Upload patient data</a>
 
     <h2>Patient list</h2>
+    <fieldset>
+    <div class="form-container">
     <form action="{{ url_for('viewpatient') }}" method="post">
         <label for="referralFilter">Referral:</label>
         <select id="referralFilter" name="referralFilter">
@@ -60,8 +93,9 @@
     </form>
     <form action="{{ url_for('search') }}" method="post">
         <input type="text" id="searchQuery" name="searchQuery" placeholder="Search...">
-        <button type="submit">Search</button>
+        <button class="search">Search</button>
     </form>
+  </div>
 
     <table border="1">
         <tr>
@@ -114,6 +148,14 @@
         </tr>
         {% endfor %}
     </table>
+    {% if pagination %}
+  <div class="pagination">
+    {{ pagination.info }}
+    {{ pagination.links }}
+  </div>
+{% endif %}
+  </fieldset>
+
 
 </body>
 
