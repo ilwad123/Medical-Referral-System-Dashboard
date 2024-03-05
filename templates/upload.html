@@ -19,9 +19,26 @@
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     align-items: center;
+    height: 100vh; /* Set the height of the body to the viewport height */
+    background-color: #f0f0f0; /* Light grey background color */
+    margin: 0; /* Remove default margin */
 
   }
-  
+  .container {
+    background-color: #ffffff; /* White background color */
+    padding: 100px 20px;
+    border-radius: 10px; /* Rounded corners for the container */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    height: 90vh;
+    width: 60vh;
+    margin:0vh 0vh 0vh 30vh;
+    font-size: 180px;
+  }
+
+  form {
+    text-align: center;
+  }
+
   /* Style the header */
   header {
     background-color: #666;
@@ -111,11 +128,13 @@ section::after {
         <a class = "button" href="{{ url_for('upload') }}">Upload patient data</a>
       </ul>
     </nav>
-  
-    <form action = "/success" method = "post" enctype="multipart/form-data">   
+
+
+    <form class="container" action = "/success" method = "post" enctype="multipart/form-data">   
       <input class= "button1" type="file" name="file" />   
       <input class="button1" type = "submit" value="Upload">  
     </form>  
+    
   </section> 
 </body>   
 </html>
