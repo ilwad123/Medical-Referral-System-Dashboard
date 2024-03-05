@@ -16,3 +16,5 @@ for now please:)))))
 place your html files in the templates folder 
 for the backend just place your stuff in app.py remember to do this as it will be easily intergrated easily 
 css files in static folder I think not sure forgotten it !!!
+
+once we decide on a template we can use the inheritance thingy that Zaheer taught us last year. that way we can make sure that every page looks exaclty the same.

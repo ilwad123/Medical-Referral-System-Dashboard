@@ -2,6 +2,9 @@ from flask import Flask, request, session, render_template, url_for, jsonify, re
 from flask_paginate import Pagination, get_page_parameter
 import csv
 import os
+from distutils.log import debug 
+from fileinput import filename 
+from flask import *  
 
 app = Flask(__name__)
 app.secret_key = 'This is my Secret Key'
@@ -13,6 +16,13 @@ def index():
 @app.route('/upload')
 def upload():
     return render_template('upload.html') 
+
+@app.route('/success', methods = ['POST'])   
+def success():   
+    if request.method == 'POST':   
+        f = request.files['file'] 
+        f.save(f.filename)   
+        return render_template("sucess.html", name = f.filename)   
   
 
 @app.route('/viewpatient',methods=['GET','POST'])
