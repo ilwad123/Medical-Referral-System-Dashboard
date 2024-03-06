@@ -1,2 +1,4 @@
-=>make the link pages seperate at the bottom make it look nicer 
-=>make the filter better css & javascript
+=>make the filter better css & javascript 
+=>links and display merged fix it 
+=>when u move on to next page should still have the same filter
+

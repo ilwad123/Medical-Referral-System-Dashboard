@@ -56,7 +56,7 @@ def viewpatient():
     pagination = Pagination(page=page, total=len(datarows),per_page=per_page)
     first_page=(page - 1) * per_page 
     last_page=first_page + per_page
-    paginated_data = datarows[first_page:last_page]
+    paginated_data = datarows[first_page:last_page]#start from first page and should end with the last page
 
     return render_template('patient.html', datarows=paginated_data, pagination=pagination)
 

@@ -64,7 +64,6 @@
         list-style: none; 
         margin: 0;
         padding: 0;
-        color:
       }
       
       .pagination-links li {
@@ -77,8 +76,18 @@
         padding: 5px 10px; 
         border: 1px solid #ccc; 
         border-radius: 7px;
+        color: #555;
+        font-weight: 300; 
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        transition:0.3s;
       }
-      
+      .pagination-links a:hover {
+        background-color: #888; 
+        color: white; 
+    }
+      .pagination.info{
+        text-align=
+      }
       </style>
       
 </head>
@@ -160,7 +169,6 @@
     </table>
     {% if pagination %}
     <div class="pagination">
-        {{ pagination.info }}
         <ul class="pagination-links">
             {{ pagination.links }}
         </ul>
