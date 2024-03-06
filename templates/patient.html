@@ -53,23 +53,32 @@
         border-radius: 5px;
         width: 80% !important;
       }
+      .scrollbar{
+        overflow: auto;
 
-      /* Add this CSS to your stylesheet or within a <style> tag in the HTML document */
-        .pagination {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .pagination-info,
-        .pagination-links {
-            margin: 20px;
-        }
-        
-        .pagination-links a {
-            margin-right: 20px; /* Adjust margin as needed between page numbers */
-        }
-        
+      }
+      .pagination{
+        text-align:left;
+      }
+      .pagination-links {
+        list-style: none; 
+        margin: 0;
+        padding: 0;
+        color:
+      }
+      
+      .pagination-links li {
+        display: inline-block;
+        margin-right: 10px;
+      }
+      
+      .pagination-links a {
+        text-decoration: none; 
+        padding: 5px 10px; 
+        border: 1px solid #ccc; 
+        border-radius: 7px;
+      }
+      
       </style>
       
 </head>
@@ -80,6 +89,7 @@
         <a href="{{ url_for('upload') }}">Upload patient data</a>
 
     <h2>Patient list</h2>
+    <div class="scrollbar">
     <fieldset>
     <div class="form-container">
     <form action="{{ url_for('viewpatient') }}" method="post">
@@ -91,7 +101,7 @@
         </select>
         <button type="submit">Apply Filter</button>
     </form>
-    <form action="{{ url_for('search') }}" method="post">
+    <form action="{{ url_for('viewpatient') }}" method="post">
         <input type="text" id="searchQuery" name="searchQuery" placeholder="Search...">
         <button class="search">Search</button>
     </form>
@@ -149,12 +159,17 @@
         {% endfor %}
     </table>
     {% if pagination %}
-  <div class="pagination">
-    {{ pagination.info }}
-    {{ pagination.links }}
-  </div>
+    <div class="pagination">
+        {{ pagination.info }}
+        <ul class="pagination-links">
+            {{ pagination.links }}
+        </ul>
+    </div>
+</div>  
 {% endif %}
   </fieldset>
+
+  <p> gekeneeddhdhsbndbjsdbjbddjd</p>
 
 
 </body>
