@@ -51,14 +51,14 @@ def viewpatient():
             datarows = [row for row in datarows if referral_filter == 'All' or referral_filter == row[17]]
             
             
-    per_page=15
+    per_page=10
     page = request.args.get('page', 1, type=int)
     pagination = Pagination(page=page, total=len(datarows),per_page=per_page)
     first_page=(page - 1) * per_page 
     last_page=first_page + per_page
     paginated_data = datarows[first_page:last_page]#start from first page and should end with the last page
 
-    return render_template('patient.html', datarows=paginated_data, pagination=pagination)
+    return render_template('patient.html', datarows=paginated_data, pagination=pagination,referral_filter=referral_filter)
 
 
 if __name__ == '__main__':
