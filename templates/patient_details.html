@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Details</title>
+</head>
+<body>
+    <h2>Patient Details</h2>
+    <table border="1">
+        <tr>
+            <th>Field</th>
+            <th>Value</th>
+        </tr>
+        {% for key, value in patient_data.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('viewpatient') }}">Back to Patient List</a>
+</body>
+</html>
