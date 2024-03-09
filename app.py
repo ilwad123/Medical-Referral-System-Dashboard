@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, session, render_template, jsonify, redirect
+from flask_paginate import Pagination, get_page_parameter
 import csv
 import os
 
@@ -11,7 +12,14 @@ def index():
 
 @app.route('/upload')
 def upload():
-    return render_template('upload.html') 
+    return render_template('upload.html')
+
+@app.route('/success', methods=['POST'])
+def success():
+    if request.method == 'POST':
+        f = request.files['file']
+        f.save(f.filename)
+        return render_template("sucess.html", name=f.filename)
 
 @app.route('/viewpatient', methods=['GET', 'POST'])
 def viewpatient():
@@ -25,24 +33,26 @@ def viewpatient():
         for line in reader:
             data = [item.strip() if item.strip() != "" else "None" for item in line]
             ref = data[17]
-            
             if ref == "0":
                 data[17] = "Not Referred"
             else:  
                 data[17] = "Referred"
+            datarows.append(data)        
             
-            datarows.append(data)
     if request.method == 'POST':
         if search_query:
-            datarows = [row for row in datarows if search_query in row[0]]
-        else:
+            datarows = [row for row in datarows if search_query == row[0]]
+        elif referral_filter:
             datarows = [row for row in datarows if referral_filter == 'All' or referral_filter == row[17]]
+            
+    per_page = 15
+    page = request.args.get('page', 1, type=int)
+    pagination = Pagination(page=page, total=len(datarows), per_page=per_page)
+    first_page = (page - 1) * per_page 
+    last_page = first_page + per_page
+    paginated_data = datarows[first_page:last_page]  # start from first page and should end with the last page
 
-    return render_template('patient.html', datarows=datarows)
-
-@app.route('/search', methods=['POST'])
-def search():
-    return viewpatient()
+    return render_template('patient.html', datarows=paginated_data, pagination=pagination)
 
 @app.route('/patientdetails', methods=['POST'])
 def patientdetails():
