@@ -61,5 +61,23 @@ def viewpatient():
     return render_template('patient.html', datarows=paginated_data, pagination=pagination)
 
 
+@app.route('/patientdetails', methods=['POST'])
+def patientdetails():
+    encounter_id = request.form.get('encounterId')  
+    patient_data = None
+
+    with open("Feeding Dashboard data.csv", 'r') as csv_file:
+        reader = csv.DictReader(csv_file)
+        for row in reader:
+            if row['encounterId'] == encounter_id:
+                patient_data = row
+                break
+
+    if patient_data:
+        return render_template('patient_details.html', patient_data=patient_data)
+    else:
+        return "Patient details not found"
+
 if __name__ == '__main__':
     app.run(debug=True)
+
