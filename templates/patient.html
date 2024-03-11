@@ -1,51 +1,49 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Patient List</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='css/patient.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/patient.css') }}">
     <style>
         table {
           width: 25%;
           border-collapse: collapse;
-          margin-bottom: 20px; 
+          margin-bottom: 20px; /* Add some bottom margin for better spacing */
         }
-      
+
         th, td {
           padding: 5px; 
           border: 1px solid black;
           text-align: left; 
           font-weight: 300; 
-          font-size:13px;
           font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         
         }
-      
-        th {
-          background-color: #f2f2f2;
-          font-size:15px;
 
+        th {
+          background-color: #f2f2f2; /* Add a light background color to header cells */
         }
-      
+
         .referred {
-          font-weight: bold; 
-          color:white;
-          background-color:red;
-          border-radius:5px;
-          border:red 3px;
+            font-weight: bold;
+            color: white;
+            background-color: red;
+            border-radius: 5px;
+            border: red 3px;
         }
+
         .Not-referred {
             background-color: blue;
-            font-weight: bold;  
-            color:white;
-            border-radius:5px;
-            border:blue 3px;
+            font-weight: bold;
+            color: white;
+            border-radius: 5px;
+            border: blue 3px;
         }
+
         .form-container {
-          display: flex;
-          justify-content: space-between;
-      }
-  
+            display: flex;
+            justify-content: space-between;
+        }
+
         form {
           margin-right: 3px; 
       }
@@ -88,41 +86,29 @@
         background-color: #888; 
         color: white; 
     }
-    .btn-group button {
-      margin-bottom: 15px;
-      font-weight: 100; 
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-      font-size:15px;
-      background-color: white; 
-      color: black; 
-      border: 1px solid #ccc; 
-
-  }
-  .btn-group {
-    display: flex;
-    }
-    .btn-group button :hover {
-      transition:0.3s;
-  }
+      .pagination.info{
+        text-align=
+      }
       </style>
       
 </head>
 <body>
-
-        <a href="{{ url_for('index') }}">Homepage</a>
-        <a href="{{ url_for('viewpatient') }}">View patient data</a>
-        <a href="{{ url_for('upload') }}">Upload patient data</a>
+    <a href="{{ url_for('index') }}">Homepage</a>
+    <a href="{{ url_for('viewpatient') }}">View patient data</a>
+    <a href="{{ url_for('upload') }}">Upload patient data</a>
 
     <h2>Patient list</h2>
     <div class="scrollbar">
     <fieldset>
     <div class="form-container">
-      <form action="{{ url_for('viewpatient') }}" method="post" class="form-inline">
-        <div class="btn-group">
-            <button type="submit" name="referralFilter" value="All">All</button>
-            <button type="submit"  name="referralFilter" value="Referred">Referred</button>
-            <button type="submit" name="referralFilter" value="Not Referred">Not referred</button>
-        </div>
+    <form action="{{ url_for('viewpatient') }}" method="post">
+        <label for="referralFilter">Referral:</label>
+        <select id="referralFilter" name="referralFilter">
+            <option value="All" selected>All</option>
+            <option value="Referred">Referred</option>
+            <option value="Not Referred">Not Referred</option>
+        </select>
+        <button type="submit">Apply Filter</button>
     </form>
     <form action="{{ url_for('viewpatient') }}" method="post">
         <input type="text" id="searchQuery" name="searchQuery" placeholder="Search...">
@@ -150,38 +136,42 @@
             <th>tidal_vol_spon</th>
             <th>bmi</th>
             <th>referral</th>
-            <th>patient details</th>
         </tr>
 
-        {% for row in datarows %}
-        <tr>
+                {% for row in datarows %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>{{ row[6] }}</td>
+                    <td>{{ row[7] }}</td>
+                    <td>{{ row[8] }}</td>
+                    <td>{{ row[9] }}</td>
+                    <td>{{ row[10] }}</td>
+                    <td>{{ row[11] }}</td>
+                    <td>{{ row[12] }}</td>
+                    <td>{{ row[13] }}</td>
+                    <td>{{ row[14] }}</td>
+                    <td>{{ row[15] }}</td>
+                    <td>{{ row[16] }}</td>
+                    <td>
+                        <button class="{% if row[17] == 'Referred' %}referred {% else %}Not-referred{% endif %}">{{ row[17] }}</button>
+                    </td>
+                    <td>
+                        <form action="/patientdetails" method="POST">
+                            <input type="hidden" name="encounterId" value="{{ row[0] }}">
+                            <button type="submit">Details</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </fieldset>
+    </div>
 
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
-            <td>{{ row[3] }}</td>
-            <td>{{ row[4] }}</td>
-            <td>{{ row[5] }}</td>
-            <td>{{ row[6] }}</td>
-            <td>{{ row[7] }}</td>
-            <td>{{ row[8] }}</td>
-            <td>{{ row[9] }}</td>
-            <td>{{ row[10] }}</td>
-            <td>{{ row[11] }}</td>
-            <td>{{ row[12] }}</td>
-            <td>{{ row[13] }}</td>
-            <td>{{ row[14] }}</td>
-            <td>{{ row[15] }}</td>
-            <td>{{ row[16] }}</td>
-            <td>
-            <button class="{% if row[17] == 'Referred' %}referred {% else %}Not-referred{% endif %}">{{ row[17] }}</td>
-            <td><form action="/patientdetails" method="POST">
-                <input type="hidden" name="Details" value="Details{{ row[18] }}">
-                <button type="submit">Details</button>
-              </form></td>
-        </tr>
-        {% endfor %}
-    </table>
     {% if pagination %}
     <div class="pagination">
         <ul class="pagination-links">
@@ -189,13 +179,6 @@
 
         </ul>
     </div>
-</div>  
-{% endif %}
-  </fieldset>
-
-  <p> gekeneeddhdhsbndbjsdbjbddjd</p>
-
-
+    {% endif %}
 </body>
-
 </html>

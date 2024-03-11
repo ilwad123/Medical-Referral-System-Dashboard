@@ -1,140 +1,62 @@
 <!DOCTYPE html>
 <html>   
 <head>   
-    <title>upload the file : GFG</title>   
+    <title>Upload the File</title>   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-  * {
-    box-sizing: border-box;
-  }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
 
-  .center {
-    margin: 0 auto;
-    width: 50%; /* Adjust the width as needed */
-  }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .button {
+            background-color: white; 
+            color: black; 
+            border: 2px solid #C8A2C8;
+            padding: 10px 32px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
   
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    align-items: center;
-    height: 100vh; /* Set the height of the body to the viewport height */
-    background-color: #f0f0f0; /* Light grey background color */
-    margin: 0; /* Remove default margin */
-
-  }
-  .container {
-    background-color: #ffffff; /* White background color */
-    padding: 100px 20px;
-    border-radius: 10px; /* Rounded corners for the container */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-    height: 90vh;
-    width: 60vh;
-    margin:0vh 0vh 0vh 30vh;
-    font-size: 180px;
-  }
-
-  form {
-    text-align: center;
-  }
-
-  /* Style the header */
-  header {
-    background-color: #666;
-    padding: 30px;
-    text-align: center;
-    font-size: 35px;
-    color: white;
-  }
-  
-  /* Create two columns/boxes that floats next to each other */
-  nav {
-    float: left;
-    width: 30%;
-    height: 300px; /* only for demonstration, should be removed */
-    background: #ccc;
-    padding: 20px;
-  }
-  
-  /* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-article {
-  float: left;
-  padding: 20px;
-  width: 70%;
-  background-color: #f1f1f1;
-  height: 300px; /* only for demonstration, should be removed */
-}
-
-/* Clear floats after the columns */
-section::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.button {
-    background-color: white; 
-    color: black; 
-    border: 2px solid #C8A2C8;
-    padding: 10px 32px;
-    text-align: ;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-  }
-  
-  .button:hover {
-    background-color: #C8A2C8;
-    color: white;
-  }
-
-  .button1 {
-    background-color: white; 
-    color: black; 
-    border: 2px solid #C8A2C8;
-  }
-
-  .button1:hover {
-    background-color: #C8A2C8;
-    color: white;
-  }
-
-
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-
-@media (max-width: 600px) {
-  nav, article {
-    width: 100%;
-    height: auto;
-  }
-}
-</style> 
+        .button:hover {
+            background-color: #C8A2C8;
+            color: white;
+        }
+    </style> 
 </head>   
 <body>   
-  <section>
-    <nav>
-      <ul>
-        <a class = "button" href="{{ url_for('index') }}">Homepage</a>
-        <a class = "button" href="{{ url_for('viewpatient') }}">View patient data</a>
-        <a class = "button" href="{{ url_for('upload') }}">Upload patient data</a>
-      </ul>
-    </nav>
-
-
-    <form class="container" action = "/success" method = "post" enctype="multipart/form-data">   
-      <input class= "button1" type="file" name="file" />   
-      <input class="button1" type = "submit" value="Upload">  
-    </form>  
-    
-  </section> 
+    <div class="container">
+        <h1>Upload the File</h1>
+        <form action="/success" method="post" enctype="multipart/form-data">   
+            <input class="button" type="file" name="file" />   
+            <input class="button" type="submit" value="Upload">  
+        </form>
+        <br>
+        <a class="button" href="{{ url_for('index') }}">Homepage</a>
+        <a class="button" href="{{ url_for('viewpatient') }}">View Patient Data</a>
+    </div>
 </body>   
 </html>
