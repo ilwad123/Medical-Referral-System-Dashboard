@@ -17,9 +17,27 @@ def upload():
 @app.route('/success', methods=['POST'])
 def success():
     if request.method == 'POST':
-        f = request.files['file']
-        f.save(f.filename)
-        return render_template("sucess.html", name=f.filename)
+        # Get the uploaded file
+        uploaded_file = request.files['file']
+
+        # Save the uploaded file
+        uploaded_file.save(uploaded_file.filename)
+
+        # Get the absolute path of the current script
+        absolute_path = os.path.dirname(os.path.abspath(__file__))
+
+        # Path to the Feeding Dashboard CSV file
+        csv_file_path = os.path.join(absolute_path, "Feeding Dashboard data.csv")
+
+        # Read the uploaded file and append its information to the Feeding Dashboard CSV file
+        with open(csv_file_path, 'a', newline='') as csv_file:
+            writer = csv.writer(csv_file)
+
+            # Assuming the uploaded file is a CSV with a header
+            reader = csv.reader(uploaded_file)
+            for row in reader:
+                writer.writerow(row)
+    return render_template("sucess.html", name=uploaded_file.filename)
 
 @app.route('/viewpatient', methods=['GET', 'POST'])
 def viewpatient():
