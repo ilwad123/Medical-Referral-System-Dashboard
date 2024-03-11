@@ -3,7 +3,6 @@
 <head>
     <title>Patient List</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='./patient.css') }}">
-      
 </head>
 <body>
     <a href="{{ url_for('index2') }}">Homepage</a>
@@ -27,7 +26,7 @@
     </form>
   </div>
 
-    <table border="1">
+    <table border="1" >
         <tr>
             <th>encounterId</th>
             <th>end_tidal_co2</th>
@@ -46,7 +45,9 @@
             <th>tidal_vol_kg</th>
             <th>tidal_vol_spon</th>
             <th>bmi</th>
-            <th>referral</th>
+            <th>Refferal status</th>
+            <th>Details</th>
+
         </tr>
 
                 {% for row in datarows %}
@@ -72,10 +73,10 @@
                         <button class="{% if row[17] == 'Need refferal' %}Need-refferal {% else %}Not-referred{% endif %}">{{ row[17] }}</button>
                     </td>
                     <td>
-                        <form action="/patientdetails" method="POST">
-                            <input type="hidden" name="encounterId" value="{{ row[0] }}">
-                            <button type="submit">Details</button>
-                        </form>
+                      <form action="/patientdetails" method="POST">
+                        <input type="hidden" name="encounterId" value="{{ row[0] }}">
+                        <button type="submit">Details</button>
+                    </form>
                     </td>
                 </tr>
                 {% endfor %}
@@ -88,8 +89,8 @@
 
         </ul>
     </div>
-    {% endif %}
   </div>
+  {% endif %}
 </fieldset>
 </body>
 </html>
