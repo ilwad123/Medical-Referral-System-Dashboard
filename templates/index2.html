@@ -7,7 +7,8 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
 
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./style2.css') }}">
+
 </head>
 <body>
     <div class="container">
@@ -26,13 +27,13 @@
                     <span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
-                <a href="#" class="active">
+                <a href="{{ url_for('viewpatient') }}" class="active">
                     <span class="material-icons-sharp">person_outline</span>
                     <h3>Patients</h3>
                 </a>
-                <a href="#">
-                    <span class="material-icons-sharp">receipt_long</span>
-                    <h3>Orders</h3>
+                <a href="{{ url_for('upload') }}">
+                    <span class="material-icons-sharp">add</span>
+                    <h3>Add Patients</h3>
                 </a>
                 <a href="#">
                     <span class="material-icons-sharp">insights</span>
@@ -43,21 +44,13 @@
                     <h3>Messages</h3>
                     <span class="message-count">20</span>
                 </a>
-                <a href="#">
-                    <span class="material-icons-sharp">inventory</span>
-                    <h3>Schedules</h3>
-                </a>
-                <a href="#">
+                <a href="{{url_for('Reports') }}">
                     <span class="material-icons-sharp">report_gmailerrorred</span>
                     <h3>Reports</h3>
                 </a>
                 <a href="#">
                     <span class="material-icons-sharp">settings</span>
                     <h3>Settings</h3>
-                </a>
-                <a href="#">
-                    <span class="material-icons-sharp">add</span>
-                    <h3>Add Patients</h3>
                 </a>
                 <a href="#">
                     <span class="material-icons-sharp">logout</span>
@@ -323,6 +316,7 @@
         </div>
     </div>
 
-    <script src="./index.js"></script>
+    <script src="{{ url_for('static', filename='./index.js.css') }}"></script>
+
 </body>
 </html>

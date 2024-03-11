@@ -10,6 +10,14 @@ app.secret_key = 'This is my Secret Key'
 def index():
     return render_template('index.html') 
 
+@app.route('/index2')
+def index2():
+    return render_template('index2.html') 
+
+@app.route('/Reports')
+def Reports():
+    return render_template('Reports.html') 
+
 @app.route('/upload')
 def upload():
     return render_template('upload.html')
@@ -54,7 +62,7 @@ def viewpatient():
             if ref == "0":
                 data[17] = "Not Referred"
             else:  
-                data[17] = "Referred"
+                data[17] = "Need refferal"
             datarows.append(data)        
             
     if request.method == 'POST':
@@ -64,7 +72,7 @@ def viewpatient():
             datarows = [row for row in datarows if referral_filter == 'All' or referral_filter == row[17]]
             
             
-    per_page=15
+    per_page=10
     page = request.args.get('page', 1, type=int)
     pagination = Pagination(page=page, total=len(datarows), per_page=per_page)
     first_page = (page - 1) * per_page 

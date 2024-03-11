@@ -2,114 +2,25 @@
 <html>
 <head>
     <title>Patient List</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/patient.css') }}">
-    <style>
-        table {
-          width: 25%;
-          border-collapse: collapse;
-          margin-bottom: 20px; /* Add some bottom margin for better spacing */
-        }
-
-        th, td {
-          padding: 5px; 
-          border: 1px solid black;
-          text-align: left; 
-          font-weight: 300; 
-          font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        
-        }
-
-        th {
-          background-color: #f2f2f2; /* Add a light background color to header cells */
-        }
-
-        .referred {
-            font-weight: bold;
-            color: white;
-            background-color: red;
-            border-radius: 5px;
-            border: red 3px;
-        }
-
-        .Not-referred {
-            background-color: blue;
-            font-weight: bold;
-            color: white;
-            border-radius: 5px;
-            border: blue 3px;
-        }
-
-        .form-container {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        form {
-          margin-right: 3px; 
-      }
-      fieldset{
-        margin: 10px; 
-        padding: 10px; 
-        border: 1px solid #ccc; 
-        border-radius: 5px;
-        width: 80% !important;
-      }
-      .scrollbar{
-        overflow: auto;
-
-      }
-      .pagination{
-        text-align:left;
-      }
-      .pagination-links {
-        list-style: none; 
-        margin: 0;
-        padding: 0;
-      }
-      
-      .pagination-links li {
-        display: inline-block;
-        margin-right: 10px;
-      }
-      
-      .pagination-links a {
-        text-decoration: none; 
-        padding: 5px 10px; 
-        border: 1px solid #ccc; 
-        border-radius: 7px;
-        color: #555;
-        font-weight: 300; 
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        transition:0.3s;
-      }
-      .pagination-links a:hover {
-        background-color: #888; 
-        color: white; 
-    }
-      .pagination.info{
-        text-align=
-      }
-      </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='./patient.css') }}">
       
 </head>
 <body>
-    <a href="{{ url_for('index') }}">Homepage</a>
+    <a href="{{ url_for('index2') }}">Homepage</a>
     <a href="{{ url_for('viewpatient') }}">View patient data</a>
     <a href="{{ url_for('upload') }}">Upload patient data</a>
 
     <h2>Patient list</h2>
     <div class="scrollbar">
     <fieldset>
-    <div class="form-container">
-    <form action="{{ url_for('viewpatient') }}" method="post">
-        <label for="referralFilter">Referral:</label>
-        <select id="referralFilter" name="referralFilter">
-            <option value="All" selected>All</option>
-            <option value="Referred">Referred</option>
-            <option value="Not Referred">Not Referred</option>
-        </select>
-        <button type="submit">Apply Filter</button>
-    </form>
+      <div class="form-container">
+        <form action="{{ url_for('viewpatient') }}" method="post" class="form-inline">
+          <div class="btn-group">
+              <button type="submit" name="referralFilter" value="All">All</button>
+              <button type="submit"  name="referralFilter" value="Need refferal">Need refferal</button>
+              <button type="submit" name="referralFilter" value="Not Referred">Not referred</button>
+          </div>
+      </form>
     <form action="{{ url_for('viewpatient') }}" method="post">
         <input type="text" id="searchQuery" name="searchQuery" placeholder="Search...">
         <button class="search">Search</button>
@@ -158,7 +69,7 @@
                     <td>{{ row[15] }}</td>
                     <td>{{ row[16] }}</td>
                     <td>
-                        <button class="{% if row[17] == 'Referred' %}referred {% else %}Not-referred{% endif %}">{{ row[17] }}</button>
+                        <button class="{% if row[17] == 'Need refferal' %}Need-refferal {% else %}Not-referred{% endif %}">{{ row[17] }}</button>
                     </td>
                     <td>
                         <form action="/patientdetails" method="POST">
@@ -169,8 +80,6 @@
                 </tr>
                 {% endfor %}
             </table>
-        </fieldset>
-    </div>
 
     {% if pagination %}
     <div class="pagination">
@@ -180,5 +89,7 @@
         </ul>
     </div>
     {% endif %}
+  </div>
+</fieldset>
 </body>
 </html>
