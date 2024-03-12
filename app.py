@@ -2,14 +2,20 @@ from flask import Flask, request, session, render_template, jsonify, redirect
 from flask_paginate import Pagination, get_page_parameter
 import csv
 import os
+from enum import Enum
+from flask import make_response
+
 
 app = Flask(__name__)
 app.secret_key = 'This is my Secret Key'
 
 @app.route('/')
-@app.route('/index2')
 def index2():
     return render_template('index2.html')
+
+@app.route('/index')
+def index():
+    return render_template('index.html')
 
 @app.route('/Reports')
 def Reports():
@@ -132,7 +138,7 @@ def load_data_from_csv(file_path):
     return data
 
 # Assuming your CSV file is named 'patient_data.csv'
-data = load_data_from_csv('NHS-App/Feeding Dashboard data.csv')
+data = load_data_from_csv('Feeding Dashboard data.csv')
 
 
 @app.route('/api/patients', methods=['GET'])
