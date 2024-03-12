@@ -138,8 +138,7 @@ def load_data_from_csv(file_path):
     return data
 
 # Assuming your CSV file is named 'patient_data.csv'
-data = load_data_from_csv('Feeding Dashboard data.csv')
-
+data = load_data_from_csv('./NHS-App/Feeding Dashboard data.csv')
 
 @app.route('/api/patients', methods=['GET'])
 def get_patient_referrals():

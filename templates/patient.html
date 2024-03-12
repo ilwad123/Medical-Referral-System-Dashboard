@@ -3,21 +3,67 @@
 <head>
     <title>Patient List</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='./patient.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+
 </head>
 <body>
-    <a href="{{ url_for('index2') }}">Homepage</a>
-    <a href="{{ url_for('viewpatient') }}">View patient data</a>
-    <a href="{{ url_for('upload') }}">Upload patient data</a>
-
-    <h2>Patient list</h2>
+    <div class="container">
+      <aside>
+          <div class="top">
+              <div class="logo">
+                  <img src="./images/logo.png">
+                  <h2>Project<span class="danger">NHS</span></h2>
+              </div>
+          <div class="close" id="close-btn">
+              <span class="material-icons-sharp">close</span>
+          </div>
+          
+          <div class="sidebar">
+              <a href="#">
+                  <span class="material-icons-sharp">grid_view</span>
+                  <h3>Dashboard</h3>
+              </a>
+              <a href="{{ url_for('viewpatient') }}" class="active">
+                  <span class="material-icons-sharp">person_outline</span>
+                  <h3>Patients</h3>
+              </a>
+              <a href="{{ url_for('upload') }}">
+                  <span class="material-icons-sharp">add</span>
+                  <h3>Add Patients</h3>
+              </a>
+              <a href="{{ url_for('index') }}">
+                  <span class="material-icons-sharp">insights</span>
+                  <h3>Analytics</h3>
+              </a>
+              <a href="#">
+                  <span class="material-icons-sharp">mail_outline</span>
+                  <h3>Messages</h3>
+                  <span class="message-count">20</span>
+              </a>
+              <a href="{{url_for('Reports') }}">
+                  <span class="material-icons-sharp">report_gmailerrorred</span>
+                  <h3>Reports</h3>
+              </a>
+              <a href="#">
+                  <span class="material-icons-sharp">settings</span>
+                  <h3>Settings</h3>
+              </a>
+              <a href="#">
+                  <span class="material-icons-sharp">logout</span>
+                  <h3>Log out</h3>
+              </a>
+          </div>
+      </aside>
+    </main>
+    <h4>Patient list</h4>
     <div class="scrollbar">
     <fieldset>
       <div class="form-container">
         <form action="{{ url_for('viewpatient') }}" method="post" class="form-inline">
           <div class="btn-group">
-              <button type="submit" name="referralFilter" value="All">All</button>
-              <button type="submit"  name="referralFilter" value="Need refferal">Need refferal</button>
-              <button type="submit" name="referralFilter" value="Not Referred">Not referred</button>
+              <button type="submit" name="referralFilter" value="All"> All </button>
+              <button type="submit"  name="referralFilter" value="Need refferal"> Need refferal </button>
+              <button type="submit" name="referralFilter" value="Not Referred"> Not referred </button>
           </div>
       </form>
     <form action="{{ url_for('viewpatient') }}" method="post">
@@ -26,7 +72,8 @@
     </form>
   </div>
 
-    <table border="1" >
+    <table>
+      <thead>
         <tr>
             <th>encounterId</th>
             <th>end_tidal_co2</th>
@@ -47,41 +94,42 @@
             <th>bmi</th>
             <th>Refferal status</th>
             <th>Details</th>
-
+        </thead>
         </tr>
-
-                {% for row in datarows %}
-                <tr>
-                    <td>{{ row[0] }}</td>
-                    <td>{{ row[1] }}</td>
-                    <td>{{ row[2] }}</td>
-                    <td>{{ row[3] }}</td>
-                    <td>{{ row[4] }}</td>
-                    <td>{{ row[5] }}</td>
-                    <td>{{ row[6] }}</td>
-                    <td>{{ row[7] }}</td>
-                    <td>{{ row[8] }}</td>
-                    <td>{{ row[9] }}</td>
-                    <td>{{ row[10] }}</td>
-                    <td>{{ row[11] }}</td>
-                    <td>{{ row[12] }}</td>
-                    <td>{{ row[13] }}</td>
-                    <td>{{ row[14] }}</td>
-                    <td>{{ row[15] }}</td>
-                    <td>{{ row[16] }}</td>
-                    <td>
-                        <button class="{% if row[17] == 'Need refferal' %}Need-refferal {% else %}Not-referred{% endif %}">{{ row[17] }}</button>
-                    </td>
-                    <td>
-                      <form action="/patientdetails" method="POST">
-                        <input type="hidden" name="encounterId" value="{{ row[0] }}">
-                        <button type="submit">Details</button>
-                    </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
-
+        <tbody>
+        {% for row in datarows %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+            <td>{{ row[5] }}</td>
+            <td>{{ row[6] }}</td>
+            <td>{{ row[7] }}</td>
+            <td>{{ row[8] }}</td>
+            <td>{{ row[9] }}</td>
+            <td>{{ row[10] }}</td>
+            <td>{{ row[11] }}</td>
+            <td>{{ row[12] }}</td>
+            <td>{{ row[13] }}</td>
+            <td>{{ row[14] }}</td>
+            <td>{{ row[15] }}</td>
+            <td>{{ row[16] }}</td>
+            <td>
+                <button class="{% if row[17] == 'Need refferal' %}Need-refferal {% else %}Not-referred{% endif %}">{{ row[17] }}</button>
+            </td>
+            <td>
+              <form action="/patientdetails" method="POST">
+                <input type="hidden" name="encounterId" value="{{ row[0] }}">
+                <button type="submit">Details</button>
+            </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    <br>
     {% if pagination %}
     <div class="pagination">
         <ul class="pagination-links">
@@ -91,6 +139,9 @@
     </div>
   </div>
   {% endif %}
+    
+    
 </fieldset>
+</main>
 </body>
 </html>
