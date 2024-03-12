@@ -95,5 +95,75 @@ def patientdetails():
     else:
         return "Patient details not found"
 
+
+class ReferralStatus(Enum):
+    NOT_REFERRED = '0'
+    REFERRED = '1'
+
+class PatientReferral:
+    def __init__(self, encounterId, end_tidal_co2, feed_vol, feed_vol_adm, fio2, fio2_ratio, insp_time,
+                 oxygen_flow_rate, peep, pip, resp_rate, sip, tidal_vol, tidal_vol_actual, tidal_vol_kg,
+                 tidal_vol_spon, bmi, referral):
+        self.encounterId = encounterId
+        self.end_tidal_co2 = end_tidal_co2
+        self.feed_vol = feed_vol
+        self.feed_vol_adm = feed_vol_adm
+        self.fio2 = fio2
+        self.fio2_ratio = fio2_ratio
+        self.insp_time = insp_time
+        self.oxygen_flow_rate = oxygen_flow_rate
+        self.peep = peep
+        self.pip = pip
+        self.resp_rate = resp_rate
+        self.sip = sip
+        self.tidal_vol = tidal_vol
+        self.tidal_vol_actual = tidal_vol_actual
+        self.tidal_vol_kg = tidal_vol_kg
+        self.tidal_vol_spon = tidal_vol_spon
+        self.bmi = bmi
+        self.referral = ReferralStatus(referral).name
+
+def load_data_from_csv(file_path):
+    data = []
+    with open(file_path, 'r') as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        for row in csv_reader:
+            data.append(PatientReferral(**row))
+    return data
+
+# Assuming your CSV file is named 'patient_data.csv'
+data = load_data_from_csv('NHS-App/Feeding Dashboard data.csv')
+
+
+@app.route('/api/patients', methods=['GET'])
+def get_patient_referrals():
+    json_data = [{'encounterId': patient.encounterId,
+                  'end_tidal_co2': patient.end_tidal_co2,
+                  'feed_vol': patient.feed_vol,
+                  'feed_vol_adm': patient.feed_vol_adm,
+                  'fio2': patient.fio2,
+                  'fio2_ratio': patient.fio2_ratio,
+                  'insp_time': patient.insp_time,
+                  'oxygen_flow_rate': patient.oxygen_flow_rate,
+                  'peep': patient.peep,
+                  'pip': patient.pip,
+                  'resp_rate': patient.resp_rate,
+                  'sip': patient.sip,
+                  'tidal_vol': patient.tidal_vol,
+                  'tidal_vol_actual': patient.tidal_vol_actual,
+                  'tidal_vol_kg': patient.tidal_vol_kg,
+                  'tidal_vol_spon': patient.tidal_vol_spon,
+                  'bmi': patient.bmi,
+                  'referral': patient.referral}  # Get the enum value
+                 for patient in data]
+
+    response = make_response(jsonify({'patients': json_data}))
+    response.headers['Access-Control-Allow-Origin'] = '*' 
+    return response
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+
