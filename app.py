@@ -7,12 +7,9 @@ app = Flask(__name__)
 app.secret_key = 'This is my Secret Key'
 
 @app.route('/')
-def index():
-    return render_template('index.html') 
-
 @app.route('/index2')
 def index2():
-    return render_template('index2.html') 
+    return render_template('index2.html')
 
 @app.route('/Reports')
 def Reports():
