@@ -89,7 +89,7 @@ def patientdetails():
     encounter_id = request.form.get('encounterId')  
     patient_data = None
 
-    with open("Feeding Dashboard data.csv", 'r') as csv_file:
+    with open("NHS-App/Feeding Dashboard data.csv", 'r') as csv_file:
         reader = csv.DictReader(csv_file)
         for row in reader:
             if row['encounterId'] == encounter_id:
