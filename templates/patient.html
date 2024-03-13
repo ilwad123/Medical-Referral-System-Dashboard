@@ -66,11 +66,13 @@
               <button type="submit" name="referralFilter" value="Not Referred"> Not referred </button>
           </div>
       </form>
+      <div class="search-container">
     <form action="{{ url_for('viewpatient') }}" method="post">
         <input type="text" id="searchQuery" name="searchQuery" placeholder="Search...">
         <button class="search">Search</button>
     </form>
   </div>
+</div>
 
     <table>
       <thead>
@@ -128,20 +130,17 @@
         </tr>
         {% endfor %}
     </tbody>
+</div>
     </table>
+    <br>
     <br>
     {% if pagination %}
     <div class="pagination">
         <ul class="pagination-links">
           {{ pagination.links }}
-
         </ul>
-    </div>
   </div>
   {% endif %}
-    
-    
 </fieldset>
-</main>
 </body>
 </html>

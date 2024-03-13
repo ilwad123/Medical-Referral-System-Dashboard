@@ -41,16 +41,17 @@
 
 table {
   background: var(--color-white);
-  width: 100%;
+  width:100%;
   border-radius: var(--card-border-radius);
   padding: var(--card-padding);
   text-align: center;
   box-shadow: var(--box-shadow);
-  border-collapse: collapse; /* Add border-collapse property */
+  border-collapse: collapse; 
   transition: all 300ms ease;
-  overflow-x: auto; 
 }
-
+.scrollbar{
+overflow-x: auto; 
+}
 table:hover {
   box-shadow: none;
 }
@@ -68,9 +69,16 @@ table tbody tr:last-child td {
 }
 table tbody {
   overflow-y: auto;
-  max-height: 50vh; /* Adjust height as needed */
+  max-height: 50vh; 
 }
-
+fieldset {
+    margin: 40px 5px; 
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    max-width: 400%;
+    height: 100vh;
+  }
 .Need-refferal {
     font-weight: bold;
     color: white;
@@ -91,23 +99,31 @@ table tbody {
 
 .form-container {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
     /* makes the search bar on the same line 
     */
 }
 
-fieldset {
-  margin: 40px 5px; 
-  padding: 10px;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  position: relative; 
-  max-width: 100%;
-  height: 95vh;
+
+
+.form-container input[type="text"] {
+  margin-right: 10px; 
+  padding: 10px 15px; 
+  border-radius: 20px; 
+  border: 2px solid var(--color-primary); 
+  margin-bottom: 13px;
+  margin-left:30px;
 }
-main{
-width:100%;
+.form-container button {
+  margin-right: 10px; 
+  padding: 10px 15px; 
+  border-radius: 20px; 
+  background-color: var(--color-primary) ;
+  border: 2px solid var(--color-primary); 
+  color:white;
+  font-size:13px;
 }
+
 /* main{
 border:2px black;
 padding: 10px;
@@ -170,6 +186,7 @@ display: flex;
 th{
   padding:10px;
 }
+
 
 
 
