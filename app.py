@@ -1,10 +1,9 @@
-from flask import Flask, request, session, render_template, jsonify, redirect
+from flask import Flask, request, session, render_template, jsonify, redirect, url_for
 from flask_paginate import Pagination, get_page_parameter
 import csv
 import os
 from enum import Enum
 from flask import make_response
-
 
 app = Flask(__name__)
 app.secret_key = 'This is my Secret Key'
@@ -28,27 +27,23 @@ def upload():
 @app.route('/success', methods=['POST'])
 def success():
     if request.method == 'POST':
-        # Get the uploaded file
         uploaded_file = request.files['file']
+        uploaded_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), uploaded_file.filename)
+        uploaded_file.save(uploaded_file_path)
+        csv_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Feeding Dashboard data.csv")
 
-        # Save the uploaded file
-        uploaded_file.save(uploaded_file.filename)
+        with open(uploaded_file_path, 'r') as uploaded_csv_file:
+            reader = csv.reader(uploaded_csv_file)
+            rows = list(reader)
 
-        # Get the absolute path of the current script
-        absolute_path = os.path.dirname(os.path.abspath(__file__))
+        if len(rows) <= 1:
+            return "Uploaded CSV file is empty or contains only header"
 
-        # Path to the Feeding Dashboard CSV file
-        csv_file_path = os.path.join(absolute_path, "Feeding Dashboard data.csv")
-
-        # Read the uploaded file and append its information to the Feeding Dashboard CSV file
         with open(csv_file_path, 'a', newline='') as csv_file:
             writer = csv.writer(csv_file)
+            writer.writerows(rows)
 
-            # Assuming the uploaded file is a CSV with a header
-            reader = csv.reader(uploaded_file)
-            for row in reader:
-                writer.writerow(row)
-    return render_template("sucess.html", name=uploaded_file.filename)
+        return redirect(url_for('viewpatient'))
 
 @app.route('/viewpatient', methods=['GET', 'POST'])
 def viewpatient():
@@ -60,20 +55,20 @@ def viewpatient():
         reader = csv.reader(csv_file)
         next(reader)  # Skip header
         for line in reader:
-            data = [item.strip() if item.strip() != "" else "None" for item in line]
-            ref = data[17]
-            if ref == "0":
-                data[17] = "Not Referred"
-            else:  
-                data[17] = "Need refferal"
-            datarows.append(data)        
+            if len(line) >= 18:  # Check if data has at least 18 elements
+                data = [item.strip() if item.strip() != "" else "None" for item in line]
+                ref = data[17]
+                if ref == "0":
+                    data[17] = "Not Referred"
+                else:  
+                    data[17] = "Need refferal"
+                datarows.append(data)        
             
     if request.method == 'POST':
         if search_query:
             datarows = [row for row in datarows if search_query == row[0]]
         elif referral_filter:
             datarows = [row for row in datarows if referral_filter == 'All' or referral_filter == row[17]]
-            
             
     per_page=10
     page = request.args.get('page', 1, type=int)
@@ -84,12 +79,13 @@ def viewpatient():
 
     return render_template('patient.html', datarows=paginated_data, pagination=pagination,referral_filter=referral_filter)
 
+
 @app.route('/patientdetails', methods=['POST'])
 def patientdetails():
     encounter_id = request.form.get('encounterId')  
     patient_data = None
 
-    with open("NHS-App/Feeding Dashboard data.csv", 'r') as csv_file:
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "Feeding Dashboard data.csv"), 'r') as csv_file:
         reader = csv.DictReader(csv_file)
         for row in reader:
             if row['encounterId'] == encounter_id:
@@ -100,7 +96,6 @@ def patientdetails():
         return render_template('patient_details.html', patient_data=patient_data)
     else:
         return "Patient details not found"
-
 
 class ReferralStatus(Enum):
     NOT_REFERRED = '0'
@@ -127,18 +122,44 @@ class PatientReferral:
         self.tidal_vol_kg = tidal_vol_kg
         self.tidal_vol_spon = tidal_vol_spon
         self.bmi = bmi
-        self.referral = ReferralStatus(referral).name
+
+        # Set referral status to a default value if the extracted value is not recognized
+        try:
+            self.referral = ReferralStatus(referral).name
+        except ValueError:
+            self.referral = ReferralStatus.NOT_REFERRED.name  # Set default value
+
 
 def load_data_from_csv(file_path):
     data = []
     with open(file_path, 'r') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         for row in csv_reader:
-            data.append(PatientReferral(**row))
+            # Convert all values to strings
+            row = {key: str(value) for key, value in row.items()}
+            data.append(PatientReferral(
+                encounterId=row['encounterId'],
+                end_tidal_co2=row['end_tidal_co2'],
+                feed_vol=row['feed_vol'],
+                feed_vol_adm=row['feed_vol_adm'],
+                fio2=row['fio2'],
+                fio2_ratio=row['fio2_ratio'],
+                insp_time=row['insp_time'],
+                oxygen_flow_rate=row['oxygen_flow_rate'],
+                peep=row['peep'],
+                pip=row['pip'],
+                resp_rate=row['resp_rate'],
+                sip=row['sip'],
+                tidal_vol=row['tidal_vol'],
+                tidal_vol_actual=row['tidal_vol_actual'],
+                tidal_vol_kg=row['tidal_vol_kg'],
+                tidal_vol_spon=row['tidal_vol_spon'],
+                bmi=row['bmi'],
+                referral=row['referral']
+            ))
     return data
 
-# Assuming your CSV file is named 'patient_data.csv'
-data = load_data_from_csv('./NHS-App/Feeding Dashboard data.csv')
+data = load_data_from_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Feeding Dashboard data.csv'))
 
 @app.route('/api/patients', methods=['GET'])
 def get_patient_referrals():
@@ -159,15 +180,11 @@ def get_patient_referrals():
                   'tidal_vol_kg': patient.tidal_vol_kg,
                   'tidal_vol_spon': patient.tidal_vol_spon,
                   'bmi': patient.bmi,
-                  'referral': patient.referral}  # Get the enum value
-                 for patient in data]
+                  'referral': patient.referral}  for patient in data]
 
     response = make_response(jsonify({'patients': json_data}))
     response.headers['Access-Control-Allow-Origin'] = '*' 
     return response
-
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
