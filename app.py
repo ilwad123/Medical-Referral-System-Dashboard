@@ -57,11 +57,8 @@ def viewpatient():
         for line in reader:
             if len(line) >= 18:  # Check if data has at least 18 elements
                 data = [item.strip() if item.strip() != "" else "None" for item in line]
-                ref = data[17]
-                if ref == "0":
-                    data[17] = "Not Referred"
-                else:  
-                    data[17] = "Need refferal"
+                data[17]= "Need refferal" if data[17] == "1" else "Need refferal"
+                data[18] = "Recommended" if data[18] == "1" else "Not Recommended"
                 datarows.append(data)        
             
     if request.method == 'POST':

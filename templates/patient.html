@@ -118,10 +118,10 @@
             <td>{{ row[14] }}</td>
             <td>{{ row[15] }}</td>
             <td>{{ row[16] }}</td>
-            <td>{{row [17]}}</td>
             <td>
-                <button class="{% if row[18] == 'Need refferal' %}Need-refferal {% else %}Not-referred{% endif %}">{{ row[18] }}</button>
+                <button class="{% if row[17] == 'Need refferal' %}Need-refferal {% else %}Not-referred{% endif %}">{{ row[17] }}</button>
             </td>
+            <td>{{row [18]}}</td>
             <td>
               <form action="/patientdetails" method="POST">
                 <input type="hidden" name="encounterId" value="{{ row[0] }}">
