@@ -45,3 +45,6 @@ data['predicted_referral'] = predictions.round().astype(int)
 patients_to_refer = data[data['predicted_referral'] == 1]
 print("Patients to refer:")
 print(patients_to_refer)
+
+# Write the dataframe to a new CSV file
+data.to_csv('algorithm.csv', index=False)
