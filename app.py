@@ -55,7 +55,7 @@ def viewpatient():
         reader = csv.reader(csv_file)
         next(reader)  # Skip header
         for line in reader:
-            if len(line) >= 18:  # Check if data has at least 18 elements
+            if len(line) >= 19:  # Check if data has at least 18 elements
                 data = [item.strip() if item.strip() != "" else "None" for item in line]
                 data[17]= "Need refferal" if data[17] == "1" else "Need refferal"
                 data[18] = "Recommended" if data[18] == "1" else "Not Recommended"
