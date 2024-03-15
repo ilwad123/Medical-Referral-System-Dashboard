@@ -11,17 +11,9 @@ data = pd.read_csv('your_dataset.csv')
 #Check for missing values and decide how to handle them. 
 #You might choose to remove rows with missing values or impute them with mean, median, or other strategies.
 
-#### i suspect that we would need to keep empty values?? - Ana 
-
-# Drop rows with missing values
-data = data.dropna()
-# Impute missing values
-data.fillna(data.mean(), inplace=True)
-
 #1.2 Feature Scaling/Normalization: 
 #It's common to scale or normalize your features to a similar range, 
 #which can help improve the convergence of your neural network.
-
 scaler = StandardScaler()
 data_scaled = scaler.fit_transform(data)
 
@@ -35,7 +27,7 @@ label_encoder = LabelEncoder()
 data['categorical_column'] = label_encoder.fit_transform(data['categorical_column'])
 
 #Split Data into Features and Labels: Separate your dataset into input features (X) and target labels (y).
-X = data.drop(columns=['target_column'])
+X = data.drop(columns=['target_column']) #idek what this means 
 y = data['target_column']
 
 #Split Data into Training and Testing Sets: Split your dataset into training and testing sets to evaluate your model's performance.
