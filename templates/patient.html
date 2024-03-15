@@ -19,7 +19,7 @@
           </div>
           
           <div class="sidebar">
-              <a href="#">
+              <a href="{{ url_for('index2') }}">
                   <span class="material-icons-sharp">grid_view</span>
                   <h3>Dashboard</h3>
               </a>
@@ -54,7 +54,6 @@
               </a>
           </div>
       </aside>
-    </main>
     <h4>Patient list</h4>
     <div class="scrollbar">
     <fieldset>
@@ -141,6 +140,8 @@
         </ul>
   </div>
   {% endif %}
+
 </fieldset>
+</div>
 </body>
 </html>
