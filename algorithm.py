@@ -7,9 +7,12 @@ from sklearn.preprocessing import StandardScaler
 # Load the data from CSV
 data = pd.read_csv('Feeding Dashboard data.csv')
 
-# Separate features (X) and target variable (y)
-X = data.iloc[:, :-1].values  # Features
-y = data.iloc[:, -1].values   # Target variable
+# Fill missing values with 0
+data.fillna(0, inplace=True)
+
+# Extract relevant features and target variable
+X = data[['feed_vol', 'oxygen_flow_rate', 'resp_rate', 'bmi']].values
+y = data['referral'].values  # Assuming 'referral' is the column indicating whether a patient should be referred
 
 # Perform feature scaling
 scaler = StandardScaler()
@@ -23,15 +26,22 @@ model = tf.keras.Sequential([
     tf.keras.layers.Input(shape=(X_train.shape[1],)),
     tf.keras.layers.Dense(64, activation='relu'),
     tf.keras.layers.Dense(32, activation='relu'),
-    tf.keras.layers.Dense(1, activation='sigmoid')  # Assuming binary classification, change activation accordingly
+    tf.keras.layers.Dense(1, activation='sigmoid')  # Output layer for binary classification
 ])
 
 # Compile the model
-model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])  # Change loss and metrics accordingly
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 # Train the model
 model.fit(X_train, y_train, epochs=10, batch_size=32, validation_split=0.1)
 
-# Evaluate the model
-loss, accuracy = model.evaluate(X_test, y_test)
-print(f'Test Loss: {loss}, Test Accuracy: {accuracy}')
+# Predict referral status for all patients
+predictions = model.predict(X_scaled)
+
+# Add predicted referral status to the dataframe
+data['predicted_referral'] = predictions.round().astype(int)
+
+# Display patients that should be referred
+patients_to_refer = data[data['predicted_referral'] == 1]
+print("Patients to refer:")
+print(patients_to_refer)
