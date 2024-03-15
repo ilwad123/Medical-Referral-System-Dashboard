@@ -94,6 +94,7 @@
             <th>tidal_vol_spon</th>
             <th>bmi</th>
             <th>Refferal status</th>
+            <th>Recommended refferal</th>
             <th>Details</th>
         </thead>
         </tr>
@@ -117,8 +118,9 @@
             <td>{{ row[14] }}</td>
             <td>{{ row[15] }}</td>
             <td>{{ row[16] }}</td>
+            <td>{{row [17]}}</td>
             <td>
-                <button class="{% if row[17] == 'Need refferal' %}Need-refferal {% else %}Not-referred{% endif %}">{{ row[17] }}</button>
+                <button class="{% if row[18] == 'Need refferal' %}Need-refferal {% else %}Not-referred{% endif %}">{{ row[18] }}</button>
             </td>
             <td>
               <form action="/patientdetails" method="POST">

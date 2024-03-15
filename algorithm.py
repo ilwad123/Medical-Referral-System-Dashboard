@@ -3,9 +3,11 @@ import numpy as np
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+import os 
+import csv 
 
 # Load the data from CSV
-data = pd.read_csv('Feeding Dashboard data.csv')
+data = pd.read_csv('./NHS-App/Feeding Dashboard data.csv')
 
 # Fill missing values with 0
 data.fillna(0, inplace=True)
@@ -47,4 +49,6 @@ print("Patients to refer:")
 print(patients_to_refer)
 
 # Write the dataframe to a new CSV file
-data.to_csv('algorithm.csv', index=False)
+absolute_path = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(absolute_path, "Algorithm.csv"), 'w') as csv_file:
+    reader = csv.reader(csv_file)
