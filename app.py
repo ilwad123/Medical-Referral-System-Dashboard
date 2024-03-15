@@ -51,11 +51,10 @@ def viewpatient():
     search_query = request.form.get('searchQuery')
     datarows = []
     absolute_path = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(absolute_path, "Feeding Dashboard data.csv"), 'r') as csv_file:
+    with open(os.path.join(absolute_path, "Algorithm.csv"), 'r') as csv_file:
         reader = csv.reader(csv_file)
-        next(reader)  # Skip header
         for line in reader:
-            if len(line) >= 18:  # Check if data has at least 18 elements
+            if len(line) >= 19:  # Check if data has at least 18 elements
                 data = [item.strip() if item.strip() != "" else "None" for item in line]
                 data[17]= "Need refferal" if data[17] == "1" else "Need refferal"
                 data[18] = "Recommended" if data[18] == "1" else "Not Recommended"

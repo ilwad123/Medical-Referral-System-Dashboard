@@ -74,63 +74,63 @@
 </div>
 
     <table>
-      <thead>
-        <tr>
-            <th>encounterId</th>
-            <th>end_tidal_co2</th>
-            <th>feed_vol</th>
-            <th>feed_vol_adm</th>
-            <th>fio2</th>
-            <th>fio2_ratio</th>
-            <th>insp_time</th>
-            <th>oxygen_flow_rate</th>
-            <th>peep</th>
-            <th>pip</th>
-            <th>resp_rate</th>
-            <th>sip</th>
-            <th>tidal_vol</th>
-            <th>tidal_vol_actual</th>
-            <th>tidal_vol_kg</th>
-            <th>tidal_vol_spon</th>
-            <th>bmi</th>
-            <th>Refferal status</th>
-            <th>Recommended refferal</th>
-            <th>Details</th>
-        </thead>
-        </tr>
-        <tbody>
-        {% for row in datarows %}
-        <tr>
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
-            <td>{{ row[3] }}</td>
-            <td>{{ row[4] }}</td>
-            <td>{{ row[5] }}</td>
-            <td>{{ row[6] }}</td>
-            <td>{{ row[7] }}</td>
-            <td>{{ row[8] }}</td>
-            <td>{{ row[9] }}</td>
-            <td>{{ row[10] }}</td>
-            <td>{{ row[11] }}</td>
-            <td>{{ row[12] }}</td>
-            <td>{{ row[13] }}</td>
-            <td>{{ row[14] }}</td>
-            <td>{{ row[15] }}</td>
-            <td>{{ row[16] }}</td>
-            <td>
-                <button class="{% if row[17] == 'Need refferal' %}Need-refferal {% else %}Not-referred{% endif %}">{{ row[17] }}</button>
-            </td>
-            <td>{{row [18]}}</td>
-            <td>
-              <form action="/patientdetails" method="POST">
-                <input type="hidden" name="encounterId" value="{{ row[0] }}">
-                <button type="submit">Details</button>
-            </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+            <thead>
+                <tr>
+                    <th>encounterId</th>
+                    <th>end_tidal_co2</th>
+                    <th>feed_vol</th>
+                    <th>feed_vol_adm</th>
+                    <th>fio2</th>
+                    <th>fio2_ratio</th>
+                    <th>insp_time</th>
+                    <th>oxygen_flow_rate</th>
+                    <th>peep</th>
+                    <th>pip</th>
+                    <th>resp_rate</th>
+                    <th>sip</th>
+                    <th>tidal_vol</th>
+                    <th>tidal_vol_actual</th>
+                    <th>tidal_vol_kg</th>
+                    <th>tidal_vol_spon</th>
+                    <th>bmi</th>
+                    <th>Referral status</th>
+                    <th>Recommended referral</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in datarows %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>{{ row[6] }}</td>
+                    <td>{{ row[7] }}</td>
+                    <td>{{ row[8] }}</td>
+                    <td>{{ row[9] }}</td>
+                    <td>{{ row[10] }}</td>
+                    <td>{{ row[11] }}</td>
+                    <td>{{ row[12] }}</td>
+                    <td>{{ row[13] }}</td>
+                    <td>{{ row[14] }}</td>
+                    <td>{{ row[15] }}</td>
+                    <td>{{ row[16] }}</td>
+                    <td>
+                        <button class="{% if row[17] == 'Need refferal' %}Need-refferal{% else %}Not-referred{% endif %}">{{ row[17] }}</button>
+                    </td>
+                    <td>{{ row[18] }}</td>
+                    <td>
+                        <form action="/patientdetails" method="POST">
+                            <input type="hidden" name="encounterId" value="{{ row[0] }}">
+                            <button type="submit">Details</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
 </div>
     </table>
     <br>
