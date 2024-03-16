@@ -316,6 +316,49 @@
         </div>
     </div>
 
+    <!-- World Time Script -->
+<script>
+    // Function to get current date and time in a specific timezone
+    function getDateTimeInTimeZone(timezone) {
+        const now = new Date();
+        const timeOptions = {
+            timeZone: timezone,
+            hour12: true,
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            day: 'numeric',
+            month: 'long', 
+            year: 'numeric'
+        };
+        return now.toLocaleString('en-US', timeOptions);
+    }
+
+    // Function to generate the calendar with world times
+    function generateWorldTime() {
+        const timezones = ['Europe/London']; 
+
+        // Add world time to the dashboard
+        const timeDiv = document.createElement('div');
+        timeDiv.classList.add('world-time');
+
+        timezones.forEach(timezone => {
+            const timezoneDiv = document.createElement('div');
+            timezoneDiv.textContent = getDateTimeInTimeZone(timezone) + " (" + timezone.split('/')[1].replace('_', ' ') + ")";
+            timeDiv.appendChild(timezoneDiv);
+            setInterval(() => {
+                timezoneDiv.textContent = getDateTimeInTimeZone(timezone) + " (" + timezone.split('/')[1].replace('_', ' ') + ")";
+            }, 1000); // Update time every second
+        });
+
+        document.querySelector('.right').appendChild(timeDiv);
+    }
+
+    // Generate world time when the page loads
+    window.onload = generateWorldTime;
+</script>
+<!-- End of World Time Script -->
+
     <script src="{{ url_for('static', filename='./index.js') }}"></script>
 
 </body>
