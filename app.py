@@ -51,7 +51,7 @@ def viewpatient():
     search_query = request.form.get('searchQuery')
     datarows = []
     absolute_path = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(absolute_path, "Feeding Dashboard data.csv"), 'r') as csv_file:
+    with open(os.path.join(absolute_path, "Algorithm.csv"), 'r') as csv_file:
         reader = csv.reader(csv_file)
         next(reader)  # Skip header
         for line in reader:
