@@ -8,6 +8,6 @@ To do List 16/03/2024:
 => Ken has to finish his report page 
 => Jana has to implement the error handling features to the upload feature, such as not allow the user 
 to add a file that has more than 18 collumns (this is not allowed and will break the code so quite important).
-=> Ana has to add the sidebar to the upload page and link the algorithm to the website so it runs when the website is ran.
+=> Ana has to add the sidebar to the upload page and link the algorithm to the website so it runs when the website is ran. DONE
 
 Ps: i changed the name of Algorithm2.csv to InputTest to avoid confusion. 
