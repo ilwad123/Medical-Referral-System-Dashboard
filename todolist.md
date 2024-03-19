@@ -5,7 +5,8 @@
 
 To do List 16/03/2024:
 => Ayans has to update her code to make sure that the graphs are pulling the data from the 'Algorithm.csv" file (can you also make sure to add the side bar to the design please?)
-=> Ken has to finish his report page 
+=> Ken has to finish his report page DONE 
+NEW TASK: Work on the patient cards.
 => Jana has to implement the error handling features to the upload feature, such as not allow the user 
 to add a file that has more than 18 collumns (this is not allowed and will break the code so quite important).
 => Ana has to add the sidebar to the upload page and link the algorithm to the website so it runs when the website is ran. DONE
