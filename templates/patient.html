@@ -78,7 +78,7 @@
         <form action="{{ url_for('viewpatient') }}" method="post" class="form-inline">
           <div class="btn-group">
               <button type="submit" name="referralFilter" value="All"> All </button>
-              <button type="submit"  name="referralFilter" value="Need refferal"> Need refferal </button>
+              <button type="submit"  name="referralFilter" value="Need referral"> Need refferal </button>
               <button type="submit" name="referralFilter" value="Not Referred"> Not referred </button>
           </div>
       </form>
@@ -136,7 +136,7 @@
                     <td>{{ row[15] }}</td>
                     <td>{{ row[16] }}</td>
                     <td>
-                        <button class="{% if row[17] == 'Need refferal' %}Need-refferal{% else %}Not-referred{% endif %}">{{ row[17] }}</button>
+                        <button class="{% if row[17] == 'Need referral' %}Need-refferal{% else %}Not-referred{% endif %}">{{ row[17] }}</button>
                     </td>
                     <td>{{ row[18] }}</td>
                     <td>
