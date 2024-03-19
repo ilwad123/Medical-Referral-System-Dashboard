@@ -4,9 +4,19 @@ import csv
 import os
 from enum import Enum
 from flask import make_response
+import subprocess
 
 app = Flask(__name__)
 app.secret_key = 'This is my Secret Key'
+
+def execute_python_file(file_path):
+   try:
+      with open(file_path, 'r') as file:
+         python_code = file.read()
+         exec(python_code)
+   except FileNotFoundError:
+      print(f"Error: The file '{file_path}' does not exist.")
+
 
 @app.route('/')
 def index2():
@@ -189,4 +199,9 @@ def get_patient_referrals():
     return response
 
 if __name__ == '__main__':
+    # Define the file path to your Python script
+    file_path = "algorithm.py"
+    # Execute the Python script
+    execute_python_file(file_path)
+    
     app.run(debug=True)
