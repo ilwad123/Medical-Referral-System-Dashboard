@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Information</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Patient Information</h1>
+    <div>
+      <label for="patientSelect">Select a patient:</label>
+      <select id="patientSelect"></select>
+    </div>
+    <table id="patientTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th>Date of Birth</th>
+          <th>Gender</th>
+          <th>Condition</th>
+          <th>Referral Needed</th>
+        </tr>
+      </thead>
+      <tbody id="patientData">
+      
+      </tbody>
+    </table>
+    <button id="exportPDF">Export to PDF</button>
+  </div>
+  <div id="csvData" style="display: none;">
+    Name,Last Name,Age,Date of Birth,Gender,Condition,Referral Needed
+    Jane,Smith,25,1999-09-20,Female,Asthma,No
+    Michael,Johnson,45,1979-07-10,Male,Hypertension,Yes
+    Emily,Williams,35,1989-03-25,Female,Arthritis,Yes
+    David,Brown,28,1996-11-08,Male,Allergies,No
+    Diana,Baker,29,1995-02-28,Female,Allergies,No
+    Kevin,Carter,42,1982-09-12,Male,Diabetes,Yes
+    Michelle,Evans,36,1988-06-17,Female,Hypertension,Yes
+    Brian,Garcia,31,1993-04-03,Male,Asthma,No
+    Samantha,Harris,26,1998-11-23,Female,Arthritis,Yes
+    Timothy,Jackson,48,1976-07-07,Male,Obesity,Yes
+    Olivia,Kelly,35,1989-10-15,Female,Depression,Yes
+    Richard,Lewis,39,1985-03-08,Male,Anxiety,Yes
+    Natalie,Murphy,45,1979-12-30,Female,Heart Disease,Yes
+    Brandon,Perez,27,1997-08-05,Male,Allergies,No
+    Christina,Ramirez,33,1991-05-20,Female,Diabetes,Yes
+    Steven,Ross,40,1984-01-10,Male,Asthma,Yes
+    Elizabeth,Scott,28,1996-04-25,Female,Hypertension,Yes
+    Justin,Taylor,38,1986-11-19,Male,Arthritis,Yes
+    Hannah,Walker,34,1990-09-02,Female,Allergies,No
+    Jordan,Young,30,1994-03-12,Male,Depression,Yes
+    Gabriel,Allen,37,1987-07-28,Male,Obesity,Yes
+    Amy,Anderson,43,1981-02-14,Female,Anxiety,Yes
+    David,Bailey,32,1992-10-31,Male,Heart Disease,Yes
+    Madison,Bennett,41,1983-05-18,Female,Diabetes,Yes
+    Ashley,Cook,25,1999-08-22,Female,Asthma,No
+    Joseph,Cox,46,1978-06-06,Male,Hypertension,Yes
+    Taylor,Diaz,29,1995-01-05,Female,Arthritis,Yes
+    Alexis,Flores,44,1980-04-11,Female,Allergies,No
+    Ryan,Gonzalez,39,1985-09-29,Male,Diabetes,Yes
+    Lauren,Green,27,1997-12-08,Female,Asthma,No
+    Diana,Baker,29,1995-02-28,Female,Allergies,No
+    Kevin,Carter,42,1982-09-12,Male,Diabetes,Yes
+    Michelle,Evans,36,1988-06-17,Female,Hypertension,Yes
+    Brian,Garcia,31,1993-04-03,Male,Asthma,No
+    Samantha,Harris,26,1998-11-23,Female,Arthritis,Yes
+    Timothy,Jackson,48,1976-07-07,Male,Obesity,Yes
+    Olivia,Kelly,35,1989-10-15,Female,Depression,Yes
+    Richard,Lewis,39,1985-03-08,Male,Anxiety,Yes
+    Natalie,Murphy,45,1979-12-30,Female,Heart Disease,Yes
+    Brandon,Perez,27,1997-08-05,Male,Allergies,No
+    Christina,Ramirez,33,1991-05-20,Female,Diabetes,Yes
+    Steven,Ross,40,1984-01-10,Male,Asthma,Yes
+    Elizabeth,Scott,28,1996-04-25,Female,Hypertension,Yes
+    Justin,Taylor,38,1986-11-19,Male,Arthritis,Yes
+    Hannah,Walker,34,1990-09-02,Female,Allergies,No
+    Jordan,Young,30,1994-03-12,Male,Depression,Yes
+    Gabriel,Allen,37,1987-07-28,Male,Obesity,Yes
+    Amy,Anderson,43,1981-02-14,Female,Anxiety,Yes
+    David,Bailey,32,1992-10-31,Male,Heart Disease,Yes
+    Madison,Bennett,41,1983-05-18,Female,Diabetes,Yes
+    Ashley,Cook,25,1999-08-22,Female,Asthma,No
+    Joseph,Cox,46,1978-06-06,Male,Hypertension,Yes
+    Taylor,Diaz,29,1995-01-05,Female,Arthritis,Yes
+    Alexis,Flores,44,1980-04-11,Female,Allergies,No
+    Ryan,Gonzalez,39,1985-09-29,Male,Diabetes,Yes
+    Lauren,Green,27,1997-12-08,Female,Asthma,No
+    Ethan,Hall,33,1991-06-15,Male,Depression,Yes
+    Isabella,Hernandez,24,2000-03-20,Female,Allergies,No
+    Tyler,Hill,42,1982-11-28,Male,Hypertension,Yes
+    Emma,Howard,31,1993-08-10,Female,Asthma,No
+    Noah,Jackson,28,1996-09-05,Male,Diabetes,Yes
+    Madison,Jones,39,1985-04-12,Female,Arthritis,Yes
+    Jacob,Kelly,30,1994-07-22,Male,Allergies,No
+    Chloe,Kim,26,1998-12-18,Female,Depression,Yes
+    Liam,King,37,1987-02-05,Male,Obesity,Yes
+    Ava,Lee,34,1990-10-31,Female,Anxiety,Yes
+    Mason,Lewis,41,1983-08-27,Male,Heart Disease,Yes
+    Olivia,Lopez,29,1995-05-07,Female,Diabetes,Yes
+    Elijah,Martin,35,1989-01-15,Male,Asthma,Yes
+    Sophia,Martinez,38,1986-06-25,Female,Hypertension,Yes
+    Logan,Miller,27,1997-04-03,Male,Arthritis,Yes
+    Harper,Mitchell,43,1981-09-30,Female,Allergies,No
+    Aiden,Morgan,32,1992-11-22,Male,Depression,Yes
+    Abigail,Morris,25,1999-02-14,Female,Obesity,Yes
+    Alexander,Murphy,36,1988-07-11,Male,Anxiety,Yes
+    Ella,Nelson,40,1984-05-08,Female,Heart Disease,Yes
+    William,Parker,33,1991-03-25,Male,Diabetes,Yes
+    Sofia,Perez,28,1996-08-03,Female,Asthma,No
+    James,Perry,45,1979-12-20,Male,Hypertension,Yes
+    Scarlett,Peterson,39,1985-10-07,Female,Arthritis,Yes
+    Lucas,Phillips,26,1998-01-19,Male,Allergies,No
+    Avery,Price,31,1993-07-14,Female,Depression,Yes
+    Riley,Ramirez,27,1997-04-25,Male,Obesity,Yes
+    Samantha,Richardson,38,1986-11-08,Female,Anxiety,Yes
+    Jackson,Rivera,29,1995-09-30,Male,Heart Disease,Yes
+    Layla,Ross,36,1988-12-12,Female,Diabetes,Yes
+    Grayson,Russell,33,1991-02-27,Male,Asthma,Yes
+    Lillian,Scott,40,1984-08-18,Female,Hypertension,Yes
+    Nolan,Simmons,25,1999-03-05,Male,Arthritis,Yes
+    Carter,Smith,34,1990-06-21,Male,Allergies,No
+    Penelope,Stewart,42,1982-04-02,Female,Depression,Yes
+    Matthew,Sullivan,26,1998-10-16,Male,Obesity,Yes
+    Aubrey,Taylor,39,1985-05-29,Female,Anxiety,Yes
+    Zoey,Thomas,28,1996-02-09,Female,Heart Disease,Yes
+    Evan,Thompson,37,1987-09-24,Male,Diabetes,Yes
+    Hazel,Torres,30,1994-08-23,Female,Asthma,No
+    Carson,Turner,35,1989-01-07,Male,Hypertension,Yes
+    Emilia,Walker,44,1980-06-19,Female,Arthritis,Yes
+    Miles,Ward,32,1992-12-31,Male,Allergies,No
+    Brooklyn,Washington,45,1979-10-14,Female,Depression,Yes
+    Lincoln,White,31,1993-11-17,Male,Obesity,Yes
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var csvData = document.getElementById('csvData').innerText.trim();
+        populatePatientSelect(csvData);
+    });
+
+    var patients = [];
+
+    function populatePatientSelect(csvData) {
+        var parsedData = csvData.split('\n').map(function(line) {
+            return line.split(',');
+        });
+
+        patients = parsedData.slice(1).map(function(row) {
+            return {
+                Name: row[0],
+                'Last Name': row[1],
+                Age: row[2],
+                'Date of Birth': row[3],
+                Gender: row[4],
+                Condition: row[5],
+                'Referral Needed': row[6]
+            };
+        });
+
+        var select = document.getElementById('patientSelect');
+        patients.forEach(function(patient, index) {
+            var option = document.createElement('option');
+            option.text = `${patient.Name} ${patient['Last Name']}`;
+            option.value = index;
+            select.appendChild(option);
+        });
+
+        select.addEventListener('change', function() {
+            var selectedIndex = parseInt(this.value);
+            displayPatient(selectedIndex);
+        });
+
+        
+        displayPatient(0);
+    }
+
+    function displayPatient(index) {
+        var patient = patients[index];
+        var patientHTML = '';
+        for (var key in patient) {
+            patientHTML += `<td>${patient[key]}</td>`;
+        }
+        document.getElementById('patientData').innerHTML = `<tr>${patientHTML}</tr>`;
+    }
+
+    document.getElementById('exportPDF').addEventListener('click', function () {
+        var selectedIndex = document.getElementById('patientSelect').value;
+        exportToPDF(patients[selectedIndex]);
+    });
+
+    async function exportToPDF(patient) {
+        console.log("Exporting to PDF...");
+        try {
+            const { PDFDocument, rgb } = PDFLib;
+
+            const pdfDoc = await PDFDocument.create();
+            const page = pdfDoc.addPage();
+
+            page.drawText(`Patient Information - ${patient.Name} ${patient['Last Name']}`, {
+                x: 50,
+                y: 750,
+                size: 24,
+                color: rgb(0, 0, 0),
+            });
+
+            let y = 700;
+            for (const [key, value] of Object.entries(patient)) {
+                page.drawText(`${key}: ${value}`, {
+                    x: 50,
+                    y,
+                    size: 12,
+                    color: rgb(0, 0, 0),
+                });
+                y -= 20;
+            }
+
+            const pdfBytes = await pdfDoc.save();
+            download(pdfBytes, "patient_information.pdf", "application/pdf");
+            console.log("PDF Exported successfully.");
+        } catch (error) {
+            console.error("Error exporting PDF:", error);
+            alert("An error occurred while exporting PDF. Please try again.");
+        }
+    }
+
+    function download(data, filename, type) {
+        const file = new Blob([data], { type: type });
+        const a = document.createElement("a");
+        const url = URL.createObjectURL(file);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 0);
+    }
+  </script>
+</body>
+</html>
