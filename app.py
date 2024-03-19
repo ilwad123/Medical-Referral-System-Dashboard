@@ -55,12 +55,18 @@ def viewpatient():
         reader = csv.reader(csv_file)
         next(reader)  # Skip header
         for line in reader:
-            if len(line) >= 19:  # Check if data has at least 18 elements
-                data = [item.strip() if item.strip() != "" else "None" for item in line]
-                data[17]= "Need refferal" if data[17] == "1" else "Need refferal"
-                data[18] = "Recommended" if data[18] == "1" else "Not Recommended"
-                datarows.append(data)        
-            
+            data = [item.strip() if item.strip() != "" else "None" for item in line]
+            ref=data[17]
+            recom=data[18]
+            if ref == "1" and recom=="1": 
+                data[17]="Need referral"
+                data[18]="Recommended"
+            else:
+                data[17]="Not Referred"
+                data[18]="Not Recommended"
+
+            datarows.append(data)        
+        
     if request.method == 'POST':
         if search_query:
             datarows = [row for row in datarows if search_query == row[0]]
@@ -82,7 +88,7 @@ def patientdetails():
     encounter_id = request.form.get('encounterId')  
     patient_data = None
 
-    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "Feeding Dashboard data.csv"), 'r') as csv_file:
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "Algorithm.csv"), 'r') as csv_file:
         reader = csv.DictReader(csv_file)
         for row in reader:
             if row['encounterId'] == encounter_id:
@@ -126,7 +132,6 @@ class PatientReferral:
         except ValueError:
             self.referral = ReferralStatus.NOT_REFERRED.name  # Set default value
 
-
 def load_data_from_csv(file_path):
     data = []
     with open(file_path, 'r') as csv_file:
@@ -156,7 +161,7 @@ def load_data_from_csv(file_path):
             ))
     return data
 
-data = load_data_from_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Feeding Dashboard data.csv'))
+data = load_data_from_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Algorithm.csv'))
 
 @app.route('/api/patients', methods=['GET'])
 def get_patient_referrals():

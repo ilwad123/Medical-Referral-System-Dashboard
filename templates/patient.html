@@ -5,24 +5,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='./patient.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
 
-<script>
-    themeToggler.addEventListener('click', () => {
-        document.body.classList.toggle('dark-theme-variables');
-    
-        themeToggler.querySelector('span:nth-child(1)').classList.toggle('active');
-        themeToggler.querySelector('span:nth-child(2)').classList.toggle('active');
-    })
-    
-</script>
 </head>
-<div class="right">
-    <div class="top">
-        <div class="theme-toggler">
-            <span class="material-icons-sharp active">light_mode</span>
-            <span class="material-icons-sharp">dark_mode</span>
-        </div>
-    </div>
-</div>
 <body>
     <div class="container">
       <aside>
@@ -78,7 +61,7 @@
         <form action="{{ url_for('viewpatient') }}" method="post" class="form-inline">
           <div class="btn-group">
               <button type="submit" name="referralFilter" value="All"> All </button>
-              <button type="submit"  name="referralFilter" value="Need refferal"> Need refferal </button>
+              <button type="submit"  name="referralFilter" value="Need referral"> Need refferal </button>
               <button type="submit" name="referralFilter" value="Not Referred"> Not referred </button>
           </div>
       </form>
@@ -135,10 +118,11 @@
                     <td>{{ row[14] }}</td>
                     <td>{{ row[15] }}</td>
                     <td>{{ row[16] }}</td>
-                    <td>
-                        <button class="{% if row[17] == 'Need refferal' %}Need-refferal{% else %}Not-referred{% endif %}">{{ row[17] }}</button>
-                    </td>
                     <td>{{ row[18] }}</td>
+
+                    <td>
+                        <button class="{% if row[17] == 'Need referral' %}Need-referral{% else %}Not-referred{% endif %}">{{ row[17] }}</button>
+                    </td>
                     <td>
                         <form action="/patientdetails" method="POST">
                             <input type="hidden" name="encounterId" value="{{ row[0] }}">
@@ -163,6 +147,6 @@
 </fieldset>
 </div>
 </body>
-<script src="{{ url_for('static', filename='./index2.js') }}"></script>
-
 </html>
+
+
