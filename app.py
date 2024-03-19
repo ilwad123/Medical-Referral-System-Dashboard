@@ -11,17 +11,12 @@ app.secret_key = 'This is my Secret Key'
 
 def execute_python_file(file_path):
    try:
-      completed_process = subprocess.run(['python', file_path], capture_output=True, text=True)
-      if completed_process.returncode == 0:
-         print("Execution successful.")
-         print("Output:")
-         print(completed_process.stdout)
-      else:
-         print(f"Error: Failed to execute '{file_path}'.")
-         print("Error output:")
-         print(completed_process.stderr)
+      with open(file_path, 'r') as file:
+         python_code = file.read()
+         exec(python_code)
    except FileNotFoundError:
       print(f"Error: The file '{file_path}' does not exist.")
+
 
 @app.route('/')
 def index2():
