@@ -5,9 +5,13 @@ import os
 from enum import Enum
 from flask import make_response
 import subprocess
+from flask import Flask, request, session, render_template, jsonify, redirect, url_for, flash
+from werkzeug.utils import secure_filename
+
 
 app = Flask(__name__)
 app.secret_key = 'This is my Secret Key'
+ALLOWED_EXTENSIONS = {'csv'}
 
 def execute_python_file(file_path):
    try:
@@ -34,12 +38,30 @@ def Reports():
 def upload():
     return render_template('upload.html')
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 @app.route('/success', methods=['POST'])
 def success():
     if request.method == 'POST':
         uploaded_file = request.files['file']
+        
+        if uploaded_file.filename == '':
+            return "No file selected for uploading"
+        
+        if not uploaded_file.filename.endswith('.csv'):
+            return "Uploaded file format is not supported. Please upload a CSV file."
+
         uploaded_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), uploaded_file.filename)
         uploaded_file.save(uploaded_file_path)
+        
+        with open(uploaded_file_path, 'r') as uploaded_csv_file:
+            reader = csv.reader(uploaded_csv_file)
+            first_row = next(reader, None)
+            if first_row and len(first_row) != 19:
+                return "Uploaded CSV file should have exactly 19 columns."
+        
         csv_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Feeding Dashboard data.csv")
 
         with open(uploaded_file_path, 'r') as uploaded_csv_file:
@@ -54,6 +76,7 @@ def success():
             writer.writerows(rows)
 
         return redirect(url_for('viewpatient'))
+
 
 @app.route('/viewpatient', methods=['GET', 'POST'])
 def viewpatient():
