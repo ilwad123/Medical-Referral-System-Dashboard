@@ -17,10 +17,8 @@
     <table id="patientTable">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Last Name</th>
+          <th>Patient ID</th>
           <th>Age</th>
-          <th>Date of Birth</th>
           <th>Gender</th>
           <th>Condition</th>
           <th>Referral Needed</th>
@@ -31,110 +29,133 @@
       </tbody>
     </table>
     <button id="exportPDF">Export to PDF</button>
+    <a href="./index2.html" class="go-back-link">
+        <button onclick="goBack()">Go Back</button>
+    </a> 
   </div>
   <div id="csvData" style="display: none;">
-    Name,Last Name,Age,Date of Birth,Gender,Condition,Referral Needed
-    Jane,Smith,25,1999-09-20,Female,Asthma,No
-    Michael,Johnson,45,1979-07-10,Male,Hypertension,Yes
-    Emily,Williams,35,1989-03-25,Female,Arthritis,Yes
-    David,Brown,28,1996-11-08,Male,Allergies,No
-    Diana,Baker,29,1995-02-28,Female,Allergies,No
-    Kevin,Carter,42,1982-09-12,Male,Diabetes,Yes
-    Michelle,Evans,36,1988-06-17,Female,Hypertension,Yes
-    Brian,Garcia,31,1993-04-03,Male,Asthma,No
-    Samantha,Harris,26,1998-11-23,Female,Arthritis,Yes
-    Timothy,Jackson,48,1976-07-07,Male,Obesity,Yes
-    Olivia,Kelly,35,1989-10-15,Female,Depression,Yes
-    Richard,Lewis,39,1985-03-08,Male,Anxiety,Yes
-    Natalie,Murphy,45,1979-12-30,Female,Heart Disease,Yes
-    Brandon,Perez,27,1997-08-05,Male,Allergies,No
-    Christina,Ramirez,33,1991-05-20,Female,Diabetes,Yes
-    Steven,Ross,40,1984-01-10,Male,Asthma,Yes
-    Elizabeth,Scott,28,1996-04-25,Female,Hypertension,Yes
-    Justin,Taylor,38,1986-11-19,Male,Arthritis,Yes
-    Hannah,Walker,34,1990-09-02,Female,Allergies,No
-    Jordan,Young,30,1994-03-12,Male,Depression,Yes
-    Gabriel,Allen,37,1987-07-28,Male,Obesity,Yes
-    Amy,Anderson,43,1981-02-14,Female,Anxiety,Yes
-    David,Bailey,32,1992-10-31,Male,Heart Disease,Yes
-    Madison,Bennett,41,1983-05-18,Female,Diabetes,Yes
-    Ashley,Cook,25,1999-08-22,Female,Asthma,No
-    Joseph,Cox,46,1978-06-06,Male,Hypertension,Yes
-    Taylor,Diaz,29,1995-01-05,Female,Arthritis,Yes
-    Alexis,Flores,44,1980-04-11,Female,Allergies,No
-    Ryan,Gonzalez,39,1985-09-29,Male,Diabetes,Yes
-    Lauren,Green,27,1997-12-08,Female,Asthma,No
-    Diana,Baker,29,1995-02-28,Female,Allergies,No
-    Kevin,Carter,42,1982-09-12,Male,Diabetes,Yes
-    Michelle,Evans,36,1988-06-17,Female,Hypertension,Yes
-    Brian,Garcia,31,1993-04-03,Male,Asthma,No
-    Samantha,Harris,26,1998-11-23,Female,Arthritis,Yes
-    Timothy,Jackson,48,1976-07-07,Male,Obesity,Yes
-    Olivia,Kelly,35,1989-10-15,Female,Depression,Yes
-    Richard,Lewis,39,1985-03-08,Male,Anxiety,Yes
-    Natalie,Murphy,45,1979-12-30,Female,Heart Disease,Yes
-    Brandon,Perez,27,1997-08-05,Male,Allergies,No
-    Christina,Ramirez,33,1991-05-20,Female,Diabetes,Yes
-    Steven,Ross,40,1984-01-10,Male,Asthma,Yes
-    Elizabeth,Scott,28,1996-04-25,Female,Hypertension,Yes
-    Justin,Taylor,38,1986-11-19,Male,Arthritis,Yes
-    Hannah,Walker,34,1990-09-02,Female,Allergies,No
-    Jordan,Young,30,1994-03-12,Male,Depression,Yes
-    Gabriel,Allen,37,1987-07-28,Male,Obesity,Yes
-    Amy,Anderson,43,1981-02-14,Female,Anxiety,Yes
-    David,Bailey,32,1992-10-31,Male,Heart Disease,Yes
-    Madison,Bennett,41,1983-05-18,Female,Diabetes,Yes
-    Ashley,Cook,25,1999-08-22,Female,Asthma,No
-    Joseph,Cox,46,1978-06-06,Male,Hypertension,Yes
-    Taylor,Diaz,29,1995-01-05,Female,Arthritis,Yes
-    Alexis,Flores,44,1980-04-11,Female,Allergies,No
-    Ryan,Gonzalez,39,1985-09-29,Male,Diabetes,Yes
-    Lauren,Green,27,1997-12-08,Female,Asthma,No
-    Ethan,Hall,33,1991-06-15,Male,Depression,Yes
-    Isabella,Hernandez,24,2000-03-20,Female,Allergies,No
-    Tyler,Hill,42,1982-11-28,Male,Hypertension,Yes
-    Emma,Howard,31,1993-08-10,Female,Asthma,No
-    Noah,Jackson,28,1996-09-05,Male,Diabetes,Yes
-    Madison,Jones,39,1985-04-12,Female,Arthritis,Yes
-    Jacob,Kelly,30,1994-07-22,Male,Allergies,No
-    Chloe,Kim,26,1998-12-18,Female,Depression,Yes
-    Liam,King,37,1987-02-05,Male,Obesity,Yes
-    Ava,Lee,34,1990-10-31,Female,Anxiety,Yes
-    Mason,Lewis,41,1983-08-27,Male,Heart Disease,Yes
-    Olivia,Lopez,29,1995-05-07,Female,Diabetes,Yes
-    Elijah,Martin,35,1989-01-15,Male,Asthma,Yes
-    Sophia,Martinez,38,1986-06-25,Female,Hypertension,Yes
-    Logan,Miller,27,1997-04-03,Male,Arthritis,Yes
-    Harper,Mitchell,43,1981-09-30,Female,Allergies,No
-    Aiden,Morgan,32,1992-11-22,Male,Depression,Yes
-    Abigail,Morris,25,1999-02-14,Female,Obesity,Yes
-    Alexander,Murphy,36,1988-07-11,Male,Anxiety,Yes
-    Ella,Nelson,40,1984-05-08,Female,Heart Disease,Yes
-    William,Parker,33,1991-03-25,Male,Diabetes,Yes
-    Sofia,Perez,28,1996-08-03,Female,Asthma,No
-    James,Perry,45,1979-12-20,Male,Hypertension,Yes
-    Scarlett,Peterson,39,1985-10-07,Female,Arthritis,Yes
-    Lucas,Phillips,26,1998-01-19,Male,Allergies,No
-    Avery,Price,31,1993-07-14,Female,Depression,Yes
-    Riley,Ramirez,27,1997-04-25,Male,Obesity,Yes
-    Samantha,Richardson,38,1986-11-08,Female,Anxiety,Yes
-    Jackson,Rivera,29,1995-09-30,Male,Heart Disease,Yes
-    Layla,Ross,36,1988-12-12,Female,Diabetes,Yes
-    Grayson,Russell,33,1991-02-27,Male,Asthma,Yes
-    Lillian,Scott,40,1984-08-18,Female,Hypertension,Yes
-    Nolan,Simmons,25,1999-03-05,Male,Arthritis,Yes
-    Carter,Smith,34,1990-06-21,Male,Allergies,No
-    Penelope,Stewart,42,1982-04-02,Female,Depression,Yes
-    Matthew,Sullivan,26,1998-10-16,Male,Obesity,Yes
-    Aubrey,Taylor,39,1985-05-29,Female,Anxiety,Yes
-    Zoey,Thomas,28,1996-02-09,Female,Heart Disease,Yes
-    Evan,Thompson,37,1987-09-24,Male,Diabetes,Yes
-    Hazel,Torres,30,1994-08-23,Female,Asthma,No
-    Carson,Turner,35,1989-01-07,Male,Hypertension,Yes
-    Emilia,Walker,44,1980-06-19,Female,Arthritis,Yes
-    Miles,Ward,32,1992-12-31,Male,Allergies,No
-    Brooklyn,Washington,45,1979-10-14,Female,Depression,Yes
-    Lincoln,White,31,1993-11-17,Male,Obesity,Yes
+    patientId,Age,Gender,Condition,Referral Needed
+    P0133,25,Female,Asthma,No
+    P0134,45,Male,Hypertension,Yes
+    P0135,35,Female,Arthritis,Yes
+    P0136,28,Male,Allergies,No
+    P0137,29,Female,Allergies,No
+    P0138,42,Male,Diabetes,Yes
+    P0139,36,Female,Hypertension,Yes
+    P0140,31,Male,Asthma,No
+    P0141,26,Female,Arthritis,Yes
+    P0142,48,Male,Obesity,Yes
+    P0143,35,Female,Depression,Yes
+    P0144,39,Male,Anxiety,Yes
+    P0145,33,Male,Allergies,No
+    P0146,27,Female,Diabetes,Yes
+    P0147,40,Male,Hypertension,Yes
+    P0148,32,Female,Depression,Yes
+    P0149,34,Male,Arthritis,Yes
+    P0150,37,Female,Allergies,No
+    P0151,30,Male,Asthma,No
+    P0152,41,Female,Diabetes,Yes
+    P0153,29,Male,Hypertension,Yes
+    P0154,38,Female,Arthritis,Yes
+    P0155,43,Male,Allergies,No
+    P0156,25,Female,Asthma,No
+    P0157,47,Male,Hypertension,Yes
+    P0158,36,Female,Diabetes,Yes
+    P0159,31,Male,Hypertension,Yes
+    P0160,26,Female,Depression,Yes
+    P0161,39,Male,Arthritis,Yes
+    P0162,30,Female,Allergies,No
+    P0163,44,Male,Diabetes,Yes
+    P0164,35,Female,Hypertension,Yes
+    P0165,28,Male,Asthma,No
+    P0166,37,Female,Depression,Yes
+    P0167,32,Male,Allergies,No
+    P0168,27,Female,Arthritis,Yes
+    P0169,41,Male,Diabetes,Yes
+    P0170,34,Female,Allergies,No
+    P0171,46,Male,Hypertension,Yes
+    P0172,38,Female,Arthritis,Yes
+    P0173,29,Male,Allergies,No
+    P0174,45,Female,Diabetes,Yes
+    P0175,40,Male,Hypertension,Yes
+    P0176,31,Female,Depression,Yes
+    P0177,26,Male,Asthma,No
+    P0178,33,Female,Arthritis,Yes
+    P0179,42,Male,Diabetes,Yes
+    P0180,37,Female,Hypertension,Yes
+    P0181,28,Male,Allergies,No
+    P0182,39,Female,Arthritis,Yes
+    P0183,44,Male,Diabetes,Yes
+    P0184,35,Female,Hypertension,Yes
+    P0185,30,Male,Asthma,No
+    P0186,41,Female,Depression,Yes
+    P0187,36,Male,Allergies,No
+    P0188,31,Female,Arthritis,Yes
+    P0189,43,Male,Diabetes,Yes
+    P0190,38,Female,Hypertension,Yes
+    P0191,27,Male,Asthma,No
+    P0192,32,Female,Depression,Yes
+    P0193,45,Male,Allergies,No
+    P0194,40,Female,Arthritis,Yes
+    P0195,35,Male,Diabetes,Yes
+    P0196,29,Female,Hypertension,Yes
+    P0197,46,Male,Depression,Yes
+    P0198,37,Female,Allergies,No
+    P0199,33,Male,Arthritis,Yes
+    P0200,48,Female,Diabetes,Yes
+    P0201,31,Male,Hypertension,Yes
+    P0202,26,Female,Depression,Yes
+    P0203,42,Male,Allergies,No
+    P0204,39,Female,Arthritis,Yes
+    P0205,34,Male,Diabetes,Yes
+    P0206,29,Female,Hypertension,Yes
+    P0207,43,Male,Depression,Yes
+    P0208,38,Female,Allergies,No
+    P0209,32,Male,Arthritis,Yes
+    P0210,47,Female,Diabetes,Yes
+    P0211,36,Male,Hypertension,Yes
+    P0212,31,Female,Depression,Yes
+    P0213,45,Male,Allergies,No
+    P0214,40,Female,Arthritis,Yes
+    P0215,35,Male,Diabetes,Yes
+    P0216,29,Female,Hypertension,Yes
+    P0217,46,Male,Depression,Yes
+    P0218,41,Female,Allergies,No
+    P0219,37,Male,Arthritis,Yes
+    P0220,48,Female,Diabetes,Yes
+    P0221,33,Male,Hypertension,Yes
+    P0222,28,Female,Depression,Yes
+    P0223,42,Male,Allergies,No
+    P0224,39,Female,Arthritis,Yes
+    P0225,34,Male,Diabetes,Yes
+    P0226,29,Female,Hypertension,Yes
+    P0227,43,Male,Depression,Yes
+    P0228,38,Female,Allergies,No
+    P0229,32,Male,Arthritis,Yes
+    P0230,47,Female,Diabetes,Yes
+    P0231,36,Male,Hypertension,Yes
+    P0232,31,Female,Depression,Yes
+    P0233,45,Male,Allergies,No
+    P0234,40,Female,Arthritis,Yes
+    P0235,35,Male,Diabetes,Yes
+    P0236,29,Female,Hypertension,Yes
+    P0237,46,Male,Depression,Yes
+    P0238,41,Female,Allergies,No
+    P0239,37,Male,Arthritis,Yes
+    P0240,48,Female,Diabetes,Yes
+    P0241,33,Male,Hypertension,Yes
+    P0242,28,Female,Depression,Yes
+    P0243,42,Male,Allergies,No
+    P0244,39,Female,Arthritis,Yes
+    P0245,34,Male,Diabetes,Yes
+    P0246,29,Female,Hypertension,Yes
+    P0247,43,Male,Depression,Yes
+    P0248,38,Female,Allergies,No
+    P0249,32,Male,Arthritis,Yes
+    P0250,47,Female,Diabetes,Yes
+    P0251,36,Male,Hypertension,Yes
+    P0252,31,Female,Depression,Yes
+    P0253,45,Male,Allergies,No
   </div>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
@@ -153,20 +174,18 @@
 
         patients = parsedData.slice(1).map(function(row) {
             return {
-                Name: row[0],
-                'Last Name': row[1],
-                Age: row[2],
-                'Date of Birth': row[3],
-                Gender: row[4],
-                Condition: row[5],
-                'Referral Needed': row[6]
+                'Patient ID': row[0],
+                'Age': row[1],
+                'Gender': row[2],
+                'Condition': row[3],
+                'Referral Needed': row[4]
             };
         });
 
         var select = document.getElementById('patientSelect');
         patients.forEach(function(patient, index) {
             var option = document.createElement('option');
-            option.text = `${patient.Name} ${patient['Last Name']}`;
+            option.text = patient['Patient ID'];
             option.value = index;
             select.appendChild(option);
         });
@@ -176,7 +195,6 @@
             displayPatient(selectedIndex);
         });
 
-        
         displayPatient(0);
     }
 
@@ -202,7 +220,7 @@
             const pdfDoc = await PDFDocument.create();
             const page = pdfDoc.addPage();
 
-            page.drawText(`Patient Information - ${patient.Name} ${patient['Last Name']}`, {
+            page.drawText(`Patient Information - ${patient['Patient ID']}`, {
                 x: 50,
                 y: 750,
                 size: 24,
@@ -241,6 +259,10 @@
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
         }, 0);
+    }
+
+    function goBack() {
+        window.history.back();
     }
   </script>
 </body>
