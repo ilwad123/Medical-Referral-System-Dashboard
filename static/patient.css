@@ -107,12 +107,19 @@ fieldset {
     */
 }
 
-
+.Messages{
+color: transparent;
+}
 
 
 .dark-theme-variables .form-container button{
 background-color: var(--color-white);
-border:white;
+}
+
+.dark-theme-variables .form-container input[type="text"]{
+    background-color: var(--color-white);
+    font-style:white;
+
 }
 
 .form-container input[type="text"] {
@@ -188,8 +195,10 @@ color: white;
   cursor: pointer;
 }
 .dark-theme-variables .btn-group button {
-    background-color: #333; /* Dark background color */
-    color: #fff; /* White text color */
+    background-color: #333; 
+    color: #fff; 
+    border:var(--color-primary);
+
 }
 
 .dark-theme-variables .btn-group button :hover {
@@ -435,13 +444,7 @@ aside .sidebar a:hover span {
     margin-left: 1rem;
 }
 
-aside .sidebar .message-count {
-    background: var(--color-danger);
-    color: var(--color-white);
-    padding: 2px 10px;
-    font-size: 11px;
-    border-radius: var(--border-radius-1);
-}
+
 
 /* Media Queries (Big Tablets and Laptops) */
 
