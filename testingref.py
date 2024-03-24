@@ -85,6 +85,8 @@ class check_number_patients(unittest.TestCase):
         #referrals_count = response_text.count("Not Reffered")
         
 class TestFilterFunction(unittest.TestCase):
+    def setUp(self):
+        self.app = app.test_client()
     #tests the viewpatientroute function works 
     def test_filter_all(self):
         response = self.app.post('/viewpatient', data={'referralFilter': 'All'})
