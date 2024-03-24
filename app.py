@@ -1,4 +1,4 @@
-from flask import Flask, request, session, render_template, jsonify, redirect, url_for
+from flask import Flask, request,session, render_template, jsonify, redirect, url_for
 from flask_paginate import Pagination, get_page_parameter
 import csv
 import os
@@ -78,8 +78,8 @@ def success():
 
 @app.route('/viewpatient', methods=['GET', 'POST'])
 def viewpatient():
-    referral_filter = request.form.get('referralFilter')
-    search_query = request.form.get('searchQuery')
+    referral_filter = session.get('referralFilter', 'All')
+    search_query = session.get('searchQuery', '')
     datarows = []
     absolute_path = os.path.dirname(os.path.abspath(__file__))
     with open(os.path.join(absolute_path, "Algorithm.csv"), 'r') as csv_file:
@@ -87,31 +87,36 @@ def viewpatient():
         next(reader)  # Skip header
         for line in reader:
             data = [item.strip() if item.strip() != "" else "None" for item in line]
-            ref=data[17]
-            recom=data[18]
-            if ref == "1" and recom=="1": 
-                data[17]="Need referral"
-                data[18]="Recommended"
+            ref = data[17]
+            recom = data[18]
+            if ref == "1" and recom == "1": 
+                data[17] = "Need referral"
+                data[18] = "Recommended"
             else:
-                data[17]="Not Referred"
-                data[18]="Not Recommended"
+                data[17] = "Not Referred"
+                data[18] = "Not Recommended"
 
             datarows.append(data)        
         
     if request.method == 'POST':
-        if search_query:
-            datarows = [row for row in datarows if search_query == row[0]]
-        elif referral_filter:
-            datarows = [row for row in datarows if referral_filter == 'All' or referral_filter == row[17]]
+        referral_filter = request.form.get('referralFilter')
+        search_query = request.form.get('searchQuery')
+        session['referralFilter'] = referral_filter  
+        session['searchQuery'] = search_query  
             
-    per_page=10
+    if search_query:
+        datarows = [row for row in datarows if search_query == row[0]]
+    elif referral_filter != 'All':
+        datarows = [row for row in datarows if referral_filter == row[17]]
+            
+    per_page = 10
     page = request.args.get('page', 1, type=int)
     pagination = Pagination(page=page, total=len(datarows), per_page=per_page)
     first_page = (page - 1) * per_page 
     last_page = first_page + per_page
-    paginated_data = datarows[first_page:last_page]  # start from first page and should end with the last page
+    paginated_data = datarows[first_page:last_page]
 
-    return render_template('patient.html', datarows=paginated_data, pagination=pagination,referral_filter=referral_filter)
+    return render_template('patient.html', datarows=paginated_data, pagination=pagination, referral_filter=referral_filter, search_query=search_query)
 
 
 @app.route('/patientdetails', methods=['POST'])
