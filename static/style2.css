@@ -264,6 +264,18 @@ main .insights {
     gap: 1.6rem;
 }
 
+.insights {
+    max-height: 700px; 
+    overflow-y: auto;
+}
+
+#scrollButton {
+    display: none; 
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
 main .insights > div {
     background: var(--color-white);
     padding: var(--card-padding);
