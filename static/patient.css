@@ -79,15 +79,16 @@ fieldset {
     padding: 10px;
     border: 1px solid transparent;
     border-radius: 5px;
-    max-width: 400%;
-    height: 100vh;
-  }
+    width:270vh;
+    height: 75vh;
+}
 .Need-refferal {
     font-weight: bold;
     color: white;
     background-color: rgb(227, 126, 25);
     border-radius: 5px;
     border: rgb(227, 126, 25) 3px;
+    padding: 8px 16px;
 }
 
 .Not-referred {
@@ -96,9 +97,8 @@ fieldset {
     color: white;
     border-radius: 5px;
     border: rgb(46, 46, 210) 3px;
+    padding: 5px 12px;
 }
-
-
 
 .form-container {
     display: flex;
@@ -179,6 +179,7 @@ color: white;
   padding: 10px 20px; 
   border-radius: 20px;
   margin-right: 10px;
+  cursor: pointer;
 }
 .btn-group {
 display: flex;
@@ -234,7 +235,16 @@ h4 {
     color: white;
     border-radius: var(--border-radius-1);
 }
-
+.details-button {
+    background-color: transparent; 
+    border: none; 
+    color:darkmagenta; 
+    font-size: 14px; 
+    text-decoration: underline;
+    cursor: pointer; 
+    padding: 0; 
+    margin: 0; 
+}
 * {
     margin: 0;
     padding: 0;

@@ -137,9 +137,10 @@
                     <td>
                         <form action="/patientdetails" method="POST">
                             <input type="hidden" name="encounterId" value="{{ row[0] }}">
-                            <button type="submit">Details</button>
+                            <button type="submit" class="details-button">Details</button>
                         </form>
                     </td>
+                    
                 </tr>
                 {% endfor %}
             </tbody>
