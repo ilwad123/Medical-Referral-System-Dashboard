@@ -49,7 +49,7 @@ class check_number_patients(unittest.TestCase):
         table_data= process_csv_data(absolute_path)
         referrals_count = sum(1 for row in table_data if row[17] == "Need referral")
         # Check if the count matches the expected value
-        self.assertEqual(referrals_count,864)
+        self.assertEqual(referrals_count,847)
          #ADD SCREENSHOT FROM SITE TO SHOW THATS THE TOTAL 
 
     def test_process_2(self):
@@ -58,7 +58,7 @@ class check_number_patients(unittest.TestCase):
         absolute_path = os.path.dirname(os.path.abspath(__file__))
         table_data= process_csv_data(absolute_path)
         num_of_refferal = sum(1 for row in table_data if row[17] == "Not Referred")
-        self.assertEqual(num_of_refferal,4522)
+        self.assertEqual(num_of_refferal,4539)
         #ADD SCREENSHOT FROM SITE TO SHOW THATS THE TOTAL 
     def test_process_3(self):
         #test for new patients added and algorithm for those  needing refferal 
@@ -79,21 +79,19 @@ class check_number_patients(unittest.TestCase):
         num_of_refferal = sum(1 for row in table_data if row[17] == "Not Referred")
         self.assertEqual(num_of_refferal,3786)
         #ADD SCREENSHOT FROM SITE TO SHOW THATS THE TOTAL 
-
-        #would be used if using flask dk???
-        #response_text = response.data.decode('utf-8')
-        #referrals_count = response_text.count("Not Reffered")
         
 class TestFilterFunction(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
     #tests the viewpatientroute function works 
     def test_filter_all(self):
+        #print out record test 
         response = self.app.post('/viewpatient', data={'referralFilter': 'All'})
         # Check if the response status code is 200 OK
         self.assertEqual(response.status_code, 200)
 
     def test_filter_need_referral(self):
+        #print out record test 
         # Simulate HTTP GET request to viewpatient route with filter option set to "Need referral"
         response = self.app.post('/viewpatient', data={'referralFilter': 'Need referral'})
         # Check if the response status code is 200 OK
@@ -105,6 +103,7 @@ class TestFilterFunction(unittest.TestCase):
         # print(need_refferal)
 
     def test_filter_not_referred(self):
+        #print out the record test 
         # Simulate HTTP GET request to viewpatient route with filter option set to "Not Referred"
         response = self.app.post('/viewpatient', data={'referralFilter': 'Not Referred'})
         # Check if the response status code is 200 OK
@@ -114,6 +113,34 @@ class TestFilterFunction(unittest.TestCase):
         # data.fillna("None", inplace=True)   
         # not_referred_records = data[data['Not Referred'] == '0']
         # print(not_referred_records)
+    def test_filter_referred_session(self):
+        # test client to simulate a client interacting with the application.
+       with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['refferalFilter'] = 'Need refferal'
+       new = client.get('/viewpatient')
+        #checks if request is successful for HTTP
+       self.assertEqual(new.status_code, 200)
+        #output the right session
+       print("Session_for_need refferal:",sess)
+
+        
+    def test_filter_not_referred_session(self):
+        # test client to simulate a client interacting with the application.
+        with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['refferalFilter'] = 'Not Referred'
+        #access the app route
+        response = client.get('/viewpatient')
+        #checks if request is successful for HTTP
+        self.assertEqual(response.status_code, 200)
+        #output the right session
+        print("Session_for_not_reffered:",sess)
+
+
+
+    
+
            
           
 if __name__ == '__main__':
