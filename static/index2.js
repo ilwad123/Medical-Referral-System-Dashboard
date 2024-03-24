@@ -18,28 +18,44 @@ closeBtn.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', function() {
     // Check if the theme mode preference is stored in local storage
     const storedThemeMode = localStorage.getItem('themeMode');
+    const themeToggler = document.querySelector('.theme-toggler');
+
+    // Apply the stored theme mode
     if (storedThemeMode === 'dark') {
-        // If the theme mode is set to dark, apply dark mode styles
-        document.body.classList.add('dark-theme-variables');
-        // Update the theme toggler icon to reflect the dark mode
-        themeToggler.querySelector('span:nth-child(1)').classList.add('active');
-        themeToggler.querySelector('span:nth-child(2)').classList.add('active');
+        toggleDarkMode();
+    } else {
+        toggleLightMode();
     }
 
     // Add event listener to the theme toggler button
-    const themeToggler = document.querySelector('.theme-toggler');
     if (themeToggler) {
         themeToggler.addEventListener('click', toggleThemeMode);
     }
 
     function toggleThemeMode() {
-        document.body.classList.toggle('dark-theme-variables');
-
-        themeToggler.querySelector('span:nth-child(1)').classList.toggle('active');
-        themeToggler.querySelector('span:nth-child(2)').classList.toggle('active');
-
-        const currentThemeMode = document.body.classList.contains('dark-theme-variables') ? 'dark' : 'light';
-        localStorage.setItem('themeMode', currentThemeMode);
+        if (document.body.classList.contains('dark-theme-variables')) {
+            toggleLightMode();
+        } else {
+            toggleDarkMode();
+        }
     }
 
+    function toggleDarkMode() {
+        document.body.classList.add('dark-theme-variables');
+        localStorage.setItem('themeMode', 'dark');
+        updateThemeTogglerIcons(true);
+    }
+
+    function toggleLightMode() {
+        document.body.classList.remove('dark-theme-variables');
+        localStorage.setItem('themeMode', 'light');
+        updateThemeTogglerIcons(false);
+    }
+
+    function updateThemeTogglerIcons(isDarkMode) {
+        const themeTogglerSpans = themeToggler.querySelectorAll('span');
+        themeTogglerSpans[0].classList.toggle('active', !isDarkMode);
+        themeTogglerSpans[1].classList.toggle('active', isDarkMode);
+    }
 });
+
