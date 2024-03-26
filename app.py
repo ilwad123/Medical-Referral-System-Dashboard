@@ -94,7 +94,7 @@ def viewpatient():
             ref = data[17]
             recom = data[18]
             if ref == "1" and recom == "1": 
-                data[17] = "Need referral"
+                data[17] = "Referred"
                 data[18] = "Recommended"
             else:
                 data[17] = "Not Referred"

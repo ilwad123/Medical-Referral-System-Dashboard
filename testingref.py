@@ -13,7 +13,7 @@ def not_process_csv_data(new_one):
             data = [item.strip() if item.strip() != "" else "None" for item in line]
             ref = data[17]
             if ref == "1": 
-                data[17] = "Need referral"
+                data[17] = "Referred"
             else:
                 data[17]="Not Referred"
                 
@@ -31,7 +31,7 @@ def process_csv_data(absolute_path):
                 ref = data[17]
                 recom = data[18]
                 if ref == "1" and recom == "1": 
-                    data[17] = "Need referral"
+                    data[17] = "Referred"
                     data[18] = "Recommended"
                 else:
                     data[17] = "Not Referred"
@@ -47,7 +47,7 @@ class check_number_patients(unittest.TestCase):
         #expected number of refferal shown on the web app compared to the csv file 
         absolute_path = os.path.dirname(os.path.abspath(__file__))
         table_data= process_csv_data(absolute_path)
-        referrals_count = sum(1 for row in table_data if row[17] == "Need referral")
+        referrals_count = sum(1 for row in table_data if row[17] == "Referred")
         # Check if the count matches the expected value
         self.assertEqual(referrals_count,847)
          #ADD SCREENSHOT FROM SITE TO SHOW THATS THE TOTAL 
@@ -66,7 +66,7 @@ class check_number_patients(unittest.TestCase):
         #feeding dashboard csv 
         new_one = os.path.dirname(os.path.abspath(__file__))
         table_data= not_process_csv_data(new_one)
-        num_of_refferal = sum(1 for row in table_data if row[17] == "Need referral")
+        num_of_refferal = sum(1 for row in table_data if row[17] == "Referred")
         self.assertEqual(num_of_refferal,1600)
         #ADD SCREENSHOT FROM SITE TO SHOW THATS THE TOTAL 
  
@@ -93,7 +93,7 @@ class TestFilterFunction(unittest.TestCase):
     def test_filter_need_referral(self):
         #print out record test 
         # Simulate HTTP GET request to viewpatient route with filter option set to "Need referral"
-        response = self.app.post('/viewpatient', data={'referralFilter': 'Need referral'})
+        response = self.app.post('/viewpatient', data={'referralFilter': 'Referred'})
         # Check if the response status code is 200 OK
         self.assertEqual(response.status_code, 200)
         #list out records that need refferal
@@ -117,7 +117,7 @@ class TestFilterFunction(unittest.TestCase):
         # test client to simulate a client interacting with the application.
        with app.test_client() as client:
             with client.session_transaction() as sess:
-                sess['refferalFilter'] = 'Need refferal'
+                sess['refferalFilter'] = 'Referred'
        new = client.get('/viewpatient')
         #checks if request is successful for HTTP
        self.assertEqual(new.status_code, 200)
