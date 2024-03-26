@@ -32,6 +32,10 @@ def index():
 def Reports():
     return render_template('Reports.html') 
 
+@app.route('/analytics')
+def analytics():
+    return render_template('analytics.html') 
+
 @app.route('/upload')
 def upload():
     return render_template('upload.html')
