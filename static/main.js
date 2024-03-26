@@ -5,13 +5,13 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => callback(data))
             .catch(error => console.error('Error fetching data:', error));
     }
-
+ 
     function createBarChart(data) {
-
+ 
         const referralLabels = data.labels.map(label => {
             return label === 'NOT_REFERRED' ? 'Not Referred' : 'Referred';
         });
-        
+       
         const ctx = document.getElementById('barChart').getContext('2d');
         new Chart(ctx, {
             type: 'bar',
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-
+ 
     function createLineChart(data) {
         const ctx = document.getElementById('lineChart').getContext('2d');
         new Chart(ctx, {
@@ -50,20 +50,24 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-
+ 
     function createPieChart(data) {
+        // Calculate total to find percentages
+        const total = data.values.reduce((acc, value) => acc + value, 0);
+   
+        // Append percentages to labels
+        const labelsWithPercentages = data.labels.map((label, index) => {
+            const percentage = ((data.values[index] / total) * 100).toFixed(2);
+            return `${label}: ${percentage}%`;
+        });
+   
         const ctx = document.getElementById('pieChart').getContext('2d');
         new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: data.labels,
+                labels: labelsWithPercentages,
                 datasets: [{
-                    data: data.values,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.8)',
-                        'rgba(54, 162, 235, 0.8)',
-                        'rgba(255, 206, 86, 0.8)',
-                    ]
+                    data: data.values
                 }]
             },
             options: {
@@ -72,7 +76,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-
+   
+ 
     function createHistogramChart(data) {
         const ctx = document.getElementById('histogramChart').getContext('2d');
         new Chart(ctx, {
@@ -97,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-
+ 
       // Map BMI values to categories
     function mapBmiToCategory(bmi) {
         if (bmi < 18.5) return 'Underweight';
@@ -105,35 +110,35 @@ document.addEventListener('DOMContentLoaded', function () {
         if (bmi >= 25.0 && bmi <= 29.9) return 'Overweight';
         if (bmi >= 30.0) return 'Obesity';
     }
-
+ 
     // Fetch data and create charts
     fetchData('http://127.0.0.1:5000/api/patients', function (data) {
         // Extract referral data
         const referralData = data.patients.map(patient => patient.referral);
-
+ 
         // Count occurrences of each referral type
         const referralCount = {};
         referralData.forEach(referral => {
             referralCount[referral] = (referralCount[referral] || 0) + 1;
         });
-
+ 
         // Prepare data for charts
         const labels = Object.keys(referralCount);
         const values = Object.values(referralCount);
-
+ 
         // Create charts
         createBarChart({ labels, values });
-
+ 
         // Extract oxygen flow rate data for the line chart
         const oxygenFlowRateData = data.patients
     .map(patient => patient.oxygen_flow_rate)
     .filter(rate => rate !== '')
-    .map(rate => Math.round(parseFloat(rate))); 
-
+    .map(rate => Math.round(parseFloat(rate)));
+ 
         createLineChart({ labels: oxygenFlowRateData , values: oxygenFlowRateData });
-
+ 
         createHistogramChart({ labels: oxygenFlowRateData , values: oxygenFlowRateData });
-
+ 
 
         // Extract BMI data for the pie chart
         const bmiData = data.patients.map(patient => patient.bmi);
@@ -143,11 +148,13 @@ document.addEventListener('DOMContentLoaded', function () {
         bmiCategories.forEach(category => {
             bmiDistribution[category] = (bmiDistribution[category] || 0) + 1;
         });
-
+ 
         // Prepare data for the pie chart
         const bmiLabels = Object.keys(bmiDistribution);
         const bmiValues = Object.values(bmiDistribution);
-
+ 
         createPieChart({ labels: bmiLabels, values: bmiValues });
     });
 });
+ 
+ 
