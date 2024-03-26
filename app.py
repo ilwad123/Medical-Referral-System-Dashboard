@@ -139,7 +139,7 @@ def patientdetails():
 class ReferralStatus(Enum):
     NOT_REFERRED = '0'
     REFERRED = '1'
-
+ 
 class PatientReferral:
     def __init__(self, encounterId, end_tidal_co2, feed_vol, feed_vol_adm, fio2, fio2_ratio, insp_time,
                  oxygen_flow_rate, peep, pip, resp_rate, sip, tidal_vol, tidal_vol_actual, tidal_vol_kg,
@@ -161,13 +161,13 @@ class PatientReferral:
         self.tidal_vol_kg = tidal_vol_kg
         self.tidal_vol_spon = tidal_vol_spon
         self.bmi = bmi
-
+ 
         # Set referral status to a default value if the extracted value is not recognized
         try:
             self.referral = ReferralStatus(referral).name
         except ValueError:
             self.referral = ReferralStatus.NOT_REFERRED.name  # Set default value
-
+ 
 def load_data_from_csv(file_path):
     data = []
     with open(file_path, 'r') as csv_file:
@@ -196,9 +196,9 @@ def load_data_from_csv(file_path):
                 referral=row['referral']
             ))
     return data
-
+ 
 data = load_data_from_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Algorithm.csv'))
-
+ 
 @app.route('/api/patients', methods=['GET'])
 def get_patient_referrals():
     json_data = [{'encounterId': patient.encounterId,
@@ -219,9 +219,9 @@ def get_patient_referrals():
                   'tidal_vol_spon': patient.tidal_vol_spon,
                   'bmi': patient.bmi,
                   'referral': patient.referral}  for patient in data]
-
+ 
     response = make_response(jsonify({'patients': json_data}))
-    response.headers['Access-Control-Allow-Origin'] = '*' 
+    response.headers['Access-Control-Allow-Origin'] = '*'
     return response
 
 @app.route('/help')
