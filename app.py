@@ -224,6 +224,10 @@ def get_patient_referrals():
     response.headers['Access-Control-Allow-Origin'] = '*' 
     return response
 
+@app.route('/help')
+def help():
+    return render_template('help.html')
+
 if __name__ == '__main__':
     # Define the file path to your Python script
     file_path = "algorithm.py"
