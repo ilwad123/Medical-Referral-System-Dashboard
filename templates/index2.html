@@ -53,10 +53,11 @@
         <!-- End of Aside -->
 
         <main>
-            <h1>Dashboard</h1>
+        <h1>Dashboard</h1>
             <div id="patientData" class="insights"></div>
-            <script src="dashboard.js"></script>
+            <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
         </main>
+
         <!-- End of Main -->
 
         <div class="right">
