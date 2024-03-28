@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const encounterIdIndex = headers.indexOf('encounterId');
             const bmiIndex = headers.indexOf('bmi');
             const referralIndex = headers.indexOf('referral');
-            const predictedReferralIndex = headers.indexOf('predicted_referral'); // Changed line
+            const predictedReferralIndex = headers.indexOf('predicted_referral'); 
 
             const encounterIdP = document.createElement('p');
             encounterIdP.textContent = `Encounter ID: ${values[encounterIdIndex]}`;
@@ -41,10 +41,10 @@ document.addEventListener('DOMContentLoaded', function() {
             referralP.textContent = `Referral: ${values[referralIndex]}`;
             patientDiv.appendChild(referralP);
 
-            const predictedReferralP = document.createElement('p'); // Changed line
-            const predictedReferralValue = values[predictedReferralIndex]; // Changed line
-            predictedReferralP.textContent = `Predicted Referral: ${predictedReferralValue === '1' ? 'Yes' : 'No'}`; // Changed line
-            patientDiv.appendChild(predictedReferralP); // Changed line
+            const predictedReferralP = document.createElement('p'); 
+            const predictedReferralValue = values[predictedReferralIndex]; 
+            predictedReferralP.textContent = `Predicted Referral: ${predictedReferralValue === '1' ? 'Yes' : 'No'}`; 
+            patientDiv.appendChild(predictedReferralP); 
 
             patientDataContainer.appendChild(patientDiv);
             displayedCount++;
