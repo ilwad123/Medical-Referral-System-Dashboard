@@ -42,6 +42,34 @@ def upload():
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def is_valid_csv(file_path):
+    try:
+        # Open the CSV file
+        with open(file_path, 'r') as csv_file:
+            reader = csv.reader(csv_file)
+            
+            # Get the header row
+            headers = next(reader, None)
+            
+            # Check if required headers are present
+            required_headers = ['encounterId', 'end_tidal_co2', 'feed_vol', 'feed_vol_adm', 'fio2', 
+                                'fio2_ratio', 'insp_time', 'oxygen_flow_rate', 'peep', 'pip', 
+                                'resp_rate', 'sip', 'tidal_vol', 'tidal_vol_actual', 'tidal_vol_kg', 
+                                'tidal_vol_spon', 'bmi', 'referral', 'predicted_referral']
+            
+            if headers is None:
+                return False, "CSV file is empty"  # File is invalid if empty
+            
+            if not all(header in headers for header in required_headers):
+                return False, "Missing required headers"  # File is invalid if required headers are missing
+            
+            return True, None  # File is valid
+        
+    except FileNotFoundError:
+        return False, "File not found"  # File is invalid if not found
+    except Exception as e:
+        return False, str(e)  # File is invalid if encountered any other error
+
 
 @app.route('/success', methods=['POST'])
 def success():
@@ -78,16 +106,38 @@ def success():
 
         return redirect(url_for('viewpatient'))
 
+def is_valid_csv():
+    absolute_path = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(absolute_path, "Algorithm.csv"), 'r') as csv_file:
+        reader = csv.reader(csv_file)
+        headers = next(reader)  
 
+        expected_headers = ['encounterId', 'end_tidal_co2', 'feed_vol', 
+                            'feed_vol_adm', 'fio2', 'fio2_ratio', 'insp_time',
+                            'oxygen_flow_rate', 'peep', 'pip', 'resp_rate',
+                            'sip', 'tidal_vol', 'tidal_vol_actual', 'tidal_vol_kg', 
+                            'tidal_vol_spon', 'bmi', 'referral', 'predicted_referral']
+
+        if headers == expected_headers:
+            return True
+        else:
+            return False
+
+    
 @app.route('/viewpatient', methods=['GET', 'POST'])
 def viewpatient():
     referral_filter = session.get('referralFilter', 'All')
     search_query = session.get('searchQuery', '')
     datarows = []
     absolute_path = os.path.dirname(os.path.abspath(__file__))
+    is_valid = is_valid_csv()
+    if not is_valid:
+        return "Invalid CSV file: CSV file headers do not match expected headers.", 400
+    
     with open(os.path.join(absolute_path, "Algorithm.csv"), 'r') as csv_file:
         reader = csv.reader(csv_file)
         next(reader)  # Skip header
+        
         for line in reader:
             data = [item.strip() if item.strip() != "" else "None" for item in line]
             ref = data[17]
@@ -99,8 +149,9 @@ def viewpatient():
                 data[17] = "Not Referred"
                 data[18] = "Not Recommended"
 
-            datarows.append(data)        
-        
+            datarows.append(data)   
+                 
+
     if request.method == 'POST':
         referral_filter = request.form.get('referralFilter')
         search_query = request.form.get('searchQuery')
