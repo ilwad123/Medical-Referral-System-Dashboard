@@ -41,7 +41,7 @@
 
 table {
   background: var(--color-white);
-  width:100%;
+  width:2000px;
   border-radius: var(--card-border-radius);
   padding: var(--card-padding);
   text-align: center;
@@ -49,8 +49,20 @@ table {
   border-collapse: collapse; 
   transition: all 300ms ease;
 }
-.scrollbar{
+.scrollbar {
+    width: 1300px;
+    overflow-x: auto;  
+  }
+  
+.dark-theme-variables ::-webkit-scrollbar{
 overflow-x: auto; 
+background-color: var(--color-white);
+}
+.dark-theme-variables ::-webkit-scrollbar-thumb {
+
+}
+.dark-theme-variables ::-webkit-scrollbar-thumb {
+    
 }
 table:hover {
   box-shadow: none;
@@ -79,9 +91,11 @@ fieldset {
     padding: 10px;
     border: 1px solid transparent;
     border-radius: 5px;
-    width:270vh;
     height: 75vh;
+    width: 270vh; 
+    overflow-x: auto; 
 }
+
 .Need-refferal {
     font-weight: bold;
     color: white;

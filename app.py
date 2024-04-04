@@ -132,6 +132,7 @@ def patientdetails():
         for row in reader:
             if row['encounterId'] == encounter_id:
                 patient_data = row
+                
                 break
 
     if patient_data:
