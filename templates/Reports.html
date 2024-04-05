@@ -14,155 +14,53 @@
       <label for="patientSelect">Select a patient:</label>
       <select id="patientSelect"></select>
     </div>
-    <table id="patientTable">
-      <thead>
-        <tr>
-          <th>Patient ID</th>
-          <th>Age</th>
-          <th>Gender</th>
-          <th>Condition</th>
-          <th>Referral Needed</th>
-        </tr>
-      </thead>
-      <tbody id="patientData">
-      
-      </tbody>
-    </table>
+    <div class="scrollable-table">
+      <table id="patientTable">
+        <thead>
+          <tr>
+            <th>encounterId</th>
+            <th>End Tidal CO2</th>
+            <th>Feed Volume</th>
+            <th>Feed Volume Administered</th>
+            <th>FIO2</th>
+            <th>FIO2 Ratio</th>
+            <th>Inspiratory Time</th>
+            <th>Oxygen Flow Rate</th>
+            <th>PEEP</th>
+            <th>PIP</th>
+            <th>Respiratory Rate</th>
+            <th>SIP</th>
+            <th>Tidal Volume</th>
+            <th>Actual Tidal Volume</th>
+            <th>Tidal Volume per kg</th>
+            <th>Spontaneous Tidal Volume</th>
+            <th>BMI</th>
+            <th>Referral</th>
+            <th>Predicted Referral</th>
+          </tr>
+        </thead>
+        <tbody id="patientData">
+        
+        </tbody>
+      </table>
+    </div>
     <button id="exportPDF">Export to PDF</button>
-    <a href="./index2.html" class="go-back-link">
+    <a href="./index.html" class="go-back-link">
         <button onclick="goBack()">Go Back</button>
-    </a> 
-  </div>
-  <div id="csvData" style="display: none;">
-    patientId,Age,Gender,Condition,Referral Needed
-    P0133,25,Female,Asthma,No
-    P0134,45,Male,Hypertension,Yes
-    P0135,35,Female,Arthritis,Yes
-    P0136,28,Male,Allergies,No
-    P0137,29,Female,Allergies,No
-    P0138,42,Male,Diabetes,Yes
-    P0139,36,Female,Hypertension,Yes
-    P0140,31,Male,Asthma,No
-    P0141,26,Female,Arthritis,Yes
-    P0142,48,Male,Obesity,Yes
-    P0143,35,Female,Depression,Yes
-    P0144,39,Male,Anxiety,Yes
-    P0145,33,Male,Allergies,No
-    P0146,27,Female,Diabetes,Yes
-    P0147,40,Male,Hypertension,Yes
-    P0148,32,Female,Depression,Yes
-    P0149,34,Male,Arthritis,Yes
-    P0150,37,Female,Allergies,No
-    P0151,30,Male,Asthma,No
-    P0152,41,Female,Diabetes,Yes
-    P0153,29,Male,Hypertension,Yes
-    P0154,38,Female,Arthritis,Yes
-    P0155,43,Male,Allergies,No
-    P0156,25,Female,Asthma,No
-    P0157,47,Male,Hypertension,Yes
-    P0158,36,Female,Diabetes,Yes
-    P0159,31,Male,Hypertension,Yes
-    P0160,26,Female,Depression,Yes
-    P0161,39,Male,Arthritis,Yes
-    P0162,30,Female,Allergies,No
-    P0163,44,Male,Diabetes,Yes
-    P0164,35,Female,Hypertension,Yes
-    P0165,28,Male,Asthma,No
-    P0166,37,Female,Depression,Yes
-    P0167,32,Male,Allergies,No
-    P0168,27,Female,Arthritis,Yes
-    P0169,41,Male,Diabetes,Yes
-    P0170,34,Female,Allergies,No
-    P0171,46,Male,Hypertension,Yes
-    P0172,38,Female,Arthritis,Yes
-    P0173,29,Male,Allergies,No
-    P0174,45,Female,Diabetes,Yes
-    P0175,40,Male,Hypertension,Yes
-    P0176,31,Female,Depression,Yes
-    P0177,26,Male,Asthma,No
-    P0178,33,Female,Arthritis,Yes
-    P0179,42,Male,Diabetes,Yes
-    P0180,37,Female,Hypertension,Yes
-    P0181,28,Male,Allergies,No
-    P0182,39,Female,Arthritis,Yes
-    P0183,44,Male,Diabetes,Yes
-    P0184,35,Female,Hypertension,Yes
-    P0185,30,Male,Asthma,No
-    P0186,41,Female,Depression,Yes
-    P0187,36,Male,Allergies,No
-    P0188,31,Female,Arthritis,Yes
-    P0189,43,Male,Diabetes,Yes
-    P0190,38,Female,Hypertension,Yes
-    P0191,27,Male,Asthma,No
-    P0192,32,Female,Depression,Yes
-    P0193,45,Male,Allergies,No
-    P0194,40,Female,Arthritis,Yes
-    P0195,35,Male,Diabetes,Yes
-    P0196,29,Female,Hypertension,Yes
-    P0197,46,Male,Depression,Yes
-    P0198,37,Female,Allergies,No
-    P0199,33,Male,Arthritis,Yes
-    P0200,48,Female,Diabetes,Yes
-    P0201,31,Male,Hypertension,Yes
-    P0202,26,Female,Depression,Yes
-    P0203,42,Male,Allergies,No
-    P0204,39,Female,Arthritis,Yes
-    P0205,34,Male,Diabetes,Yes
-    P0206,29,Female,Hypertension,Yes
-    P0207,43,Male,Depression,Yes
-    P0208,38,Female,Allergies,No
-    P0209,32,Male,Arthritis,Yes
-    P0210,47,Female,Diabetes,Yes
-    P0211,36,Male,Hypertension,Yes
-    P0212,31,Female,Depression,Yes
-    P0213,45,Male,Allergies,No
-    P0214,40,Female,Arthritis,Yes
-    P0215,35,Male,Diabetes,Yes
-    P0216,29,Female,Hypertension,Yes
-    P0217,46,Male,Depression,Yes
-    P0218,41,Female,Allergies,No
-    P0219,37,Male,Arthritis,Yes
-    P0220,48,Female,Diabetes,Yes
-    P0221,33,Male,Hypertension,Yes
-    P0222,28,Female,Depression,Yes
-    P0223,42,Male,Allergies,No
-    P0224,39,Female,Arthritis,Yes
-    P0225,34,Male,Diabetes,Yes
-    P0226,29,Female,Hypertension,Yes
-    P0227,43,Male,Depression,Yes
-    P0228,38,Female,Allergies,No
-    P0229,32,Male,Arthritis,Yes
-    P0230,47,Female,Diabetes,Yes
-    P0231,36,Male,Hypertension,Yes
-    P0232,31,Female,Depression,Yes
-    P0233,45,Male,Allergies,No
-    P0234,40,Female,Arthritis,Yes
-    P0235,35,Male,Diabetes,Yes
-    P0236,29,Female,Hypertension,Yes
-    P0237,46,Male,Depression,Yes
-    P0238,41,Female,Allergies,No
-    P0239,37,Male,Arthritis,Yes
-    P0240,48,Female,Diabetes,Yes
-    P0241,33,Male,Hypertension,Yes
-    P0242,28,Female,Depression,Yes
-    P0243,42,Male,Allergies,No
-    P0244,39,Female,Arthritis,Yes
-    P0245,34,Male,Diabetes,Yes
-    P0246,29,Female,Hypertension,Yes
-    P0247,43,Male,Depression,Yes
-    P0248,38,Female,Allergies,No
-    P0249,32,Male,Arthritis,Yes
-    P0250,47,Female,Diabetes,Yes
-    P0251,36,Male,Hypertension,Yes
-    P0252,31,Female,Depression,Yes
-    P0253,45,Male,Allergies,No
+    </a>    
   </div>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var csvData = document.getElementById('csvData').innerText.trim();
-        populatePatientSelect(csvData);
+        fetch('Algorithm.csv')
+            .then(response => response.text())
+            .then(csvData => {
+                populatePatientSelect(csvData);
+            })
+            .catch(error => {
+                console.error('Error fetching CSV file:', error);
+            });
     });
 
     var patients = [];
@@ -174,18 +72,32 @@
 
         patients = parsedData.slice(1).map(function(row) {
             return {
-                'Patient ID': row[0],
-                'Age': row[1],
-                'Gender': row[2],
-                'Condition': row[3],
-                'Referral Needed': row[4]
+                'encounterId': row[0],
+                'End Tidal CO2': row[1],
+                'Feed Volume': row[2],
+                'Feed Volume Administered': row[3],
+                'FIO2': row[4],
+                'FIO2 Ratio': row[5],
+                'Inspiratory Time': row[6],
+                'Oxygen Flow Rate': row[7],
+                'PEEP': row[8],
+                'PIP': row[9],
+                'Respiratory Rate': row[10],
+                'SIP': row[11],
+                'Tidal Volume': row[12],
+                'Actual Tidal Volume': row[13],
+                'Tidal Volume per kg': row[14],
+                'Spontaneous Tidal Volume': row[15],
+                'BMI': row[16],
+                'Referral': row[17],
+                'Predicted Referral': row[18],
             };
         });
 
         var select = document.getElementById('patientSelect');
         patients.forEach(function(patient, index) {
             var option = document.createElement('option');
-            option.text = patient['Patient ID'];
+            option.text = patient['encounterId'];
             option.value = index;
             select.appendChild(option);
         });
@@ -220,7 +132,7 @@
             const pdfDoc = await PDFDocument.create();
             const page = pdfDoc.addPage();
 
-            page.drawText(`Patient Information - ${patient['Patient ID']}`, {
+            page.drawText(`Patient Information - ${patient['encounterId']}`, {
                 x: 50,
                 y: 750,
                 size: 24,
