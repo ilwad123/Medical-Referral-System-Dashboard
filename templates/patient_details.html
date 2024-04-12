@@ -2,21 +2,131 @@
 <html>
 <head>
     <title>Patient Details</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+/* Root Variables */
+
+:root {
+    --color-primary: #7380ec;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --clor-info-light: #dce1eb;
+    --color-dark: #362949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-primary-variant: #111e88;
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+.dark-theme-variables {
+    --color-background: #181a1e;
+    --color-white: #202528;
+    --color-dark: #edeffd;
+    --color-dark-variant: #a3bdcc;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+table {
+    background: var(--color-white);
+    width:50%;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    border-collapse: collapse; 
+    transition: all 300ms ease;
+    border-color: transparent;
+}
+
+table:hover {
+    box-shadow: none;
+}
+
+table tbody td {
+    height: 1.5rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+}
+
+table tbody tr:last-child td {
+    border: none;
+}
+
+table tbody {
+    overflow-y: auto;
+    max-height: 50vh; 
+}
+
+th {
+    padding: 10px;
+}
+
+h2 {
+    margin-left: 30px;
+    color:var(--color-dark);
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+a{
+    margin-left: 30px;
+
+}
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: poppins, sans-serif;
+    font-size: 0.88rem;
+    background: var(--color-background);
+    user-select: none;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    margin-right:70vh;
+}
+
+    </style>
 </head>
 <body>
     <h2>Patient Details</h2>
-    <table border="1">
-        <tr>
-            <th>Field</th>
-            <th>Value</th>
-        </tr>
-        {% for key, value in patient_data.items() %}
-            <tr>
-                <td>{{ key }}</td>
-                <td>{{ value }}</td>
-            </tr>
-        {% endfor %}
-    </table>
     <a href="{{ url_for('viewpatient') }}">Back to Patient List</a>
+	<div class= “container”>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in patient_data.items() %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
+</div>
 </html>
