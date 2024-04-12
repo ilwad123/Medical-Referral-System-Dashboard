@@ -36,6 +36,30 @@ body {
     --box-shadow: 0 2rem 3rem var(--color-light);
 }
 
+.dark-theme-variables .form-container button{
+    background-color: var(--color-white);
+    }
+    
+    .dark-theme-variables .form-container input[type="text"]{
+        background-color: var(--color-white);
+        font-style:white;
+    
+    }
+
+    .dark-theme-variables .btn-group button {
+        background-color: #333; 
+        color: #fff; 
+        border:var(--color-primary);
+    
+    }
+    
+    .dark-theme-variables .btn-group button :hover {
+        background-color: #555; 
+    }
+    .dark-theme-variables .details-button{
+    color:white;
+    }
+    
 .container1 {
     background-color: #ffffff;
     padding: 20px;
