@@ -108,7 +108,7 @@ def success():
 
 def is_valid_csv():
     absolute_path = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(absolute_path, "Algorithm.csv"), 'r') as csv_file:
+    with open(os.path.join(absolute_path, "./static/Algorithm.csv"), 'r') as csv_file:
         reader = csv.reader(csv_file)
         headers = next(reader)  
 
@@ -134,7 +134,7 @@ def viewpatient():
     if not is_valid:
         return "Invalid CSV file: CSV file headers do not match expected headers.", 400
     
-    with open(os.path.join(absolute_path, "Algorithm.csv"), 'r') as csv_file:
+    with open(os.path.join(absolute_path, "./static/Algorithm.csv"), 'r') as csv_file:
         reader = csv.reader(csv_file)
         next(reader)  # Skip header
         
@@ -178,7 +178,7 @@ def patientdetails():
     encounter_id = request.form.get('encounterId')  
     patient_data = None
 
-    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "Algorithm.csv"), 'r') as csv_file:
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "./static/Algorithm.csv"), 'r') as csv_file:
         reader = csv.DictReader(csv_file)
         for row in reader:
             if row['encounterId'] == encounter_id:
@@ -252,7 +252,7 @@ def load_data_from_csv(file_path):
             ))
     return data
  
-data = load_data_from_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Algorithm.csv'))
+data = load_data_from_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)), './static/Algorithm.csv'))
  
 @app.route('/api/patients', methods=['GET'])
 def get_patient_referrals():

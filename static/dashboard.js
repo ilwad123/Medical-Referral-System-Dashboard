@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const fetchData = async () => {
         try {
-            const response = await fetch('Algorithm.csv');
+            const response = await fetch('./static/Algorithm.csv');
             const csvData = await response.text();
             processData(csvData);
         } catch (error) {
