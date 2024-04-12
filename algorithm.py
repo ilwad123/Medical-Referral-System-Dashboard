@@ -7,7 +7,7 @@ import os
 import csv 
 
 # Load the data from CSV
-data = pd.read_csv('Feeding Dashboard data.csv')
+data = pd.read_csv('./static/Feeding Dashboard data.csv')
 
 # Fill missing values with 0
 data.fillna(0, inplace=True)
