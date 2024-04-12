@@ -3,103 +3,74 @@
 <head>   
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='./style2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./upload.css') }}">
 
     <title>Upload the File</title>   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        * {
-            box-sizing: border-box;
+        /* Add custom styles here */
+        .right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 20px;
         }
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
+        .theme-toggler {
             display: flex;
             align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            margin: 0;
-        }
-
-        .container1 {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 50%;
-            margin: auto;
-            text-align: center;
-        }
-
-        .button {
-            background-color: white; 
-            color: black; 
-            border: 2px solid #C8A2C8;
-            padding: 10px 32px;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-        }
-  
-        .button:hover {
-            background-color: #C8A2C8;
-            color: white;
         }
     </style> 
 </head>   
-<div class="right">
-    <div class="top">
-        <button id="menu-btn">
-            <span class="materials-icon-sharp">Menu</span>
-        </button>
+
+<body> 
+    <div class="right">
         <div class="theme-toggler">
             <span class="material-icons-sharp active">light_mode</span>
             <span class="material-icons-sharp">dark_mode</span>
         </div>
     </div>
-</div>
-<body> 
-       <aside>
-            <div class="top">
-                <div class="logo">
-                    <img src="./images/logo.png">
-                    <h2>Project<span class="danger">NHS</span></h2>
-                </div>
+
+    <aside>
+        <div class="top">
+            <div class="logo">
+                <img src="./images/logo.png">
+                <h2>Project<span class="danger">NHS</span></h2>
+            </div>
             <div class="close" id="close-btn">
                 <span class="material-icons-sharp">close</span>
             </div>
-            
-            <div class="sidebar">
-                <a href="{{ url_for('index2') }}">
-                    <span class="material-icons-sharp">grid_view</span>
-                    <h3>Dashboard</h3>
-                </a>
-                <a href="{{ url_for('viewpatient') }}" class="active">
-                    <span class="material-icons-sharp">person_outline</span>
-                    <h3>Patients</h3>
-                </a>
-                <a href="{{ url_for('upload') }}">
-                    <span class="material-icons-sharp">add</span>
-                    <h3>Add Patients</h3>
-                </a>
-                <a href="{{ url_for('analytics') }}">
-                    <span class="material-icons-sharp">insights</span>
-                    <h3>Analytics</h3>
-                </a>
-                <a href="{{ url_for('help') }}">
-                    <span class="material-icons-sharp">help</span>
-                    <h3>Help</h3>
-                </a>
-                <a href="{{url_for('Reports') }}">
-                    <span class="material-icons-sharp">report_gmailerrorred</span>
-                    <h3>Reports</h3>
-                </a>
-               
-            </div>
-        </aside>
+        </div>
+        
+        <div class="sidebar">
+            <a href="{{ url_for('index2') }}">
+                <span class="material-icons-sharp">grid_view</span>
+                <h3>Dashboard</h3>
+            </a>
+            <a href="{{ url_for('viewpatient') }}" class="active">
+                <span class="material-icons-sharp">person_outline</span>
+                <h3>Patients</h3>
+            </a>
+            <a href="{{ url_for('upload') }}">
+                <span class="material-icons-sharp">add</span>
+                <h3>Add Patients</h3>
+            </a>
+            <a href="{{ url_for('analytics') }}">
+                <span class="material-icons-sharp">insights</span>
+                <h3>Analytics</h3>
+            </a>
+            <a href="{{ url_for('help') }}">
+                <span class="material-icons-sharp">help</span>
+                <h3>Help</h3>
+            </a>
+            <a href="{{url_for('Reports') }}">
+                <span class="material-icons-sharp">report_gmailerrorred</span>
+                <h3>Reports</h3>
+            </a>
+        </div>
+    </aside>
+
     <div class="container1">
         <h1>Upload the File</h1>
         <form action="/success" method="post" enctype="multipart/form-data">   
@@ -109,4 +80,5 @@
         <br>
     </div>
 </body>   
+<script src="{{ url_for('static', filename='./index2.js') }}"></script>
 </html>
