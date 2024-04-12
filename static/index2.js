@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const sidebarLinks = document.querySelectorAll(".sidebar a");
 
     sidebarLinks.forEach(link => {
+        link.classList.remove("active");
         if (link.getAttribute("href") === currentLocation) {
             link.classList.add("active");
         }
