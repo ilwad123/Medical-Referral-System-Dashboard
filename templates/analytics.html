@@ -8,30 +8,48 @@
  
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
     <style>
         * {
             box-sizing: border-box;
         }
  
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            display: flex;
-            align-items: center;
+            width: 100vw;
             height: 100vh;
-            background-color: #f0f0f0;
-            margin: 0;
+            font-family: poppins, sans-serif;
+            font-size: 0.88rem;
+            background: var(--color-background);
+            user-select: none;
+            overflow-x: hidden;
+            align-items: center;
+            display:flex;
+            color: var(--color-dark);
         }
- 
+        
+        
         .container {
             background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 50%;
+            width: 70%;
             margin: auto;
             text-align: center;
         }
- 
+       
+        .right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 20px;
+        }
+
+        .theme-toggler {
+            display: flex;
+            align-items: center;
+        }
         .button {
             background-color: white;
             color: black;
@@ -49,8 +67,34 @@
             background-color: #C8A2C8;
             color: white;
         }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around; /* Add this line */
+        }
+        
+        .col-md-6 {
+            width: calc(50% - 15px);
+            margin: 10px 12px; /* Adjust the margin-left and margin-right */
+        }
+        
+        .dark-theme-variables .container{
+            background-color: #202528; 
+            color:white;
+        }
     </style>
 </head>  
+<div class="right">
+    <div class="top">
+        <button id="menu-btn">
+            <span class="materials-icon-sharp">Menu</span>
+        </button>
+        <div class="theme-toggler">
+            <span class="material-icons-sharp active">light_mode</span>
+            <span class="material-icons-sharp">dark_mode</span>
+        </div>
+    </div>
+</div>
 <body>
        <aside>
             <div class="top">
@@ -87,6 +131,7 @@
                     <span class="material-icons-sharp">report_gmailerrorred</span>
                     <h3>Reports</h3>
                 </a>
+                
             </div>
         </aside>
         <div class="container mt-5">
@@ -139,4 +184,5 @@
             </div>
         </div>
 </body>  
+<script src="{{ url_for('static', filename='./index2.js') }}"></script>
 </html>
