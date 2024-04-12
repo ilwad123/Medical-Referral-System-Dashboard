@@ -37,6 +37,17 @@
     --color-light: rgba(0, 0, 0, 0.4);
     --box-shadow: 0 2rem 3rem var(--color-light);
 }
+.right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 20px;
+}
+
+.theme-toggler {
+    display: flex;
+    align-items: center;
+}
 
 
 table {
