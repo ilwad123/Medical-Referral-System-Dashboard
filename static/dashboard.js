@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         patientsToDisplay.forEach(row => {
             const values = row.split(',');
-            const patientDiv = createPatientDiv(headers, values, ['encounterId', 'bmi', 'referral']);
+            const patientDiv = createPatientDiv(headers, values, ['encounterId', 'bmi', 'referral','predicted_referral']);
             patientDataContainer.appendChild(patientDiv);
             displayedCount++;
         });
@@ -43,7 +43,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 let dataValue = values[index];
                 // Check if the header is 'referral' and modify the value accordingly
                 if (header === 'referral') {
-                    dataValue = (dataValue === '1') ? 'Yes' : 'No';
+                    dataValue = (dataValue === '1') ? 'Referred' : 'Not Referred';
+                }
+                if (header === 'predicted_referral') {
+                    dataValue = (dataValue === '1') ? 'Recommended' : 'Not recommended';
                 }
                 const dataP = document.createElement('p');
                 dataP.textContent = `${header}: ${dataValue}`;

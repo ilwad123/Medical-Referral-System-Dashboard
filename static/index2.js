@@ -8,11 +8,22 @@ menuBtn.addEventListener('click', () => {
     sideMenu.style.display = 'block';
 })
 
-
 // close sidebar
 closeBtn.addEventListener('click', () => {
     sideMenu.style.display = 'none';
 })
+//used to show the right link 
+document.addEventListener("DOMContentLoaded", function() {
+    const currentLocation = window.location.pathname;
+    const sidebarLinks = document.querySelectorAll(".sidebar a");
+
+    sidebarLinks.forEach(link => {
+        if (link.getAttribute("href") === currentLocation) {
+            link.classList.add("active");
+        }
+    });
+});
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -27,7 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
         toggleLightMode();
     }
 
-    // Add event listener to the theme toggler button
     if (themeToggler) {
         themeToggler.addEventListener('click', toggleThemeMode);
     }
