@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const sidebarLinks = document.querySelectorAll(".sidebar a");
 
     sidebarLinks.forEach(link => {
+        //removes the active link problem of having patient link being highlighted 
+        //no matter what 
         link.classList.remove("active");
         if (link.getAttribute("href") === currentLocation) {
             link.classList.add("active");
