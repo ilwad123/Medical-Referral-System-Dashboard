@@ -718,3 +718,20 @@ main .recent-orders a {
         font-size: 2rem;
     }
 }
+
+
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    flex: 0 1 45%;
+    margin: 10px;
+}
+
+.card-body {
+    text-align: center;
+}
