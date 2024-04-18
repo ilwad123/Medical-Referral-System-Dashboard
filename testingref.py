@@ -7,7 +7,7 @@ def not_process_csv_data(new_one):
     #data given initially csv 
     datarows=[]
     new_one = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(new_one, "Feeding Dashboard data.csv"), 'r') as csv_file:
+    with open(os.path.join(new_one, "./static/Feeding Dashboard data.csv"), 'r') as csv_file:
         reader = csv.reader(csv_file)
         for line in reader:
             data = [item.strip() if item.strip() != "" else "None" for item in line]
@@ -24,7 +24,7 @@ def process_csv_data(absolute_path):
     #algorithm data csv
     datarows=[]
     absolute_path = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(absolute_path, "Algorithm.csv"), 'r') as csv_file:
+    with open(os.path.join(absolute_path, "./static/Algorithm.csv"), 'r') as csv_file:
         reader = csv.reader(csv_file)
         for line in reader:
                 data = [item.strip() if item.strip() != "" else "None" for item in line]
