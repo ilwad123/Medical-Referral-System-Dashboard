@@ -95,7 +95,7 @@ def success():
             if first_row and len(first_row) != 19:
                 return "Uploaded CSV file should have exactly 19 columns."
         
-        algorithm_csv_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "./static/Algorithm.csv")
+        algorithm_csv_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Feeding Dashboard data.csv")
 
         with open(uploaded_file_path, 'r') as uploaded_csv_file:
             reader = csv.reader(uploaded_csv_file)
