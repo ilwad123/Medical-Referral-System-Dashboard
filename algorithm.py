@@ -7,7 +7,7 @@ import os
 import csv 
 
 # Load the data from CSV
-data = pd.read_csv('./static/Feeding Dashboard data.csv')
+data = pd.read_csv('Feeding Dashboard data.csv')
 
 # Fill missing values with 0
 data.fillna(0, inplace=True)
@@ -49,4 +49,4 @@ print("Patients to refer:")
 print(patients_to_refer)
 
 # Write the dataframe to a new CSV file
-data.to_csv('./static/Algorithm.csv', index=False)
+data.to_csv('Algorithm.csv', index=False)
