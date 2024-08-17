@@ -1,6 +1,7 @@
 **NHS App**
 
 **Own contributions**
+
 Helped display patient data in a presentable manner in a table with links and created the structure of app.py 
 I also collaborated on other sections of the web app.
 
