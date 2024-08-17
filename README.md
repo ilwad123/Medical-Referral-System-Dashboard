@@ -1,11 +1,12 @@
-**NHS App**
+**HEALTH-APP Group project**
+
+A refferal web app used for medical proffessionals to refer patients to dieticians based on their physiological measurements.
 
 **Own contributions**
-
-Helped display patient data in a presentable manner in a table with links and created the structure of app.py 
+Helped display patient data in a presentable manner in a table with accessible links, including a search bar and filtering options for referred , non-referred patients and all patients, and created the structure of the app.py file.
 I also collaborated on other sections of the web app.
 
-Conducted automated testing to see if the data is transferred properly to the website which is in the testingref.py file.
+Conducted automated testing to see if the data is displayed properly on the website and the functionality of the wesbsite is working good , which is in the testingref.py file.
 ### Introduction
 
 This Flask Python program serves as the backend for the NHS App, providing essential functionalities for managing patient data.
