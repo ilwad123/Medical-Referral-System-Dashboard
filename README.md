@@ -4,6 +4,7 @@
 Helped display patient data in a presentable manner in a table with links and created the structure of app.py 
 I also collaborated on other sections of the web app.
 
+Conducted automated testing to see if the data is transferred properly to the website which is in the testingref.py file.
 ### Introduction
 
 This Flask Python program serves as the backend for the NHS App, providing essential functionalities for managing patient data.
