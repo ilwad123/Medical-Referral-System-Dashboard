@@ -27,7 +27,8 @@ A referral web app used by medical professionals to refer patients to dieticians
 
 #### Patient Page  
 **Multi-paged, scrollable, filterable, and searchable tables to view overall patient data**  
-![Patient Page Screenshot](readme_image/patient_page.png)
+![Patient Page Screenshot](/patient_part1.png)
+![Patient Page Screenshot](/patient_part2.png)
 
 ---
 ### Installation
