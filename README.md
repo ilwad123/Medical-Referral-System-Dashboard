@@ -6,7 +6,7 @@ A referral web app used by medical professionals to refer patients to dieticians
 - Multi-paged, scrollable, and searchable tables to view overall patient data  
 - Analytics displaying patient information as charts  
 - File upload functionality to add and update patient data required by the machine learning algorithm for patient referrals  
-- Machine learning algorithm to refer patients automatically  
+- Machine learning algorithm to categorised refferal automatically  
 - Help page  
 
 ---
