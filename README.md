@@ -1,4 +1,4 @@
-#### Medical Referral System Dashboard (Group Project)
+# Medical Referral System Dashboard (Group Project)
 
 A referral web app used by medical professionals to refer patients to dieticians based on their physiological measurements.
 
